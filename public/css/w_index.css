@@ -1,0 +1,123 @@
+@charset "utf-8";
+/* CSS Document */
+img{
+	border:none;
+	}
+a{
+	
+	}
+	
+
+.left{
+	float:left;
+	}
+.clear{
+	clear:both;
+	}
+
+
+
+.w_portal_box{
+	width:1010px;
+	margin:0 auto;
+	color:#fff;
+	font-size:22px;
+	font-family:"微软雅黑","宋体";
+	}
+.one_block,.two_block,.three_block,.four_block,.five_block,.six_block,.seven_block,.eight_block,.nine_block,.ten_block,.eleven_block,.twelve_block{
+	width:330px;
+	height:150px;
+	background:#0f88a2;
+	display:block;
+	position:relative;
+	margin:0 10px 10px 0;
+	float:left;
+	}
+.two_block,.three_block,.eight_block,.nine_block,.eleven_block,.twelve_block{
+	width:160px;
+	height:150px;
+	background:#d91ece;
+	}
+.three_block{
+	background:#2449a5;
+	}
+.four_block{
+	background:#137dcf;
+	margin-right:0;
+	}
+.five_block{
+	background:#df6808;
+	}
+.six_block{
+	background:#9608df;
+	}
+.seven_block{
+	background:#b61555;
+	margin-right:0;
+	}
+.eight_block{
+	background:#05a3e8;
+	}
+.nine_block{
+	background:#639028;
+	}
+.ten_block{
+	background:#079e9c;
+	}
+.eleven_block{
+	background:#103f63;
+	}
+.twelve_block{
+	background:#9a0d81;
+	margin-right:0;
+	}
+
+
+.w_center_title{
+	position:absolute;
+	left:10px;
+	bottom:10px;
+	color:#fff;
+	}
+
+
+
+.w_center_icon1,.w_center_icon2,.w_center_icon3,.w_center_icon4,.w_center_icon5,.w_center_icon6,.w_center_icon7,.w_center_icon8,.w_center_icon9,.w_center_icon10,.w_center_icon11,.w_center_icon12{
+	width:85px;
+	height:84px;
+	background:url(../images/index_icon/iicon_01.png) no-repeat 0 0;
+	margin:20px auto 0 auto;
+	}
+.w_center_icon2{
+	background:url(../images/index_icon/iicon_02.png) no-repeat 0 0;
+	}
+.w_center_icon3{
+	background:url(../images/index_icon/iicon_03.png) no-repeat 0 0;
+	}
+.w_center_icon4{
+	background:url(../images/index_icon/iicon_04.png) no-repeat 0 0;
+	}
+.w_center_icon5{
+	background:url(../images/index_icon/iicon_05.png) no-repeat 0 0;
+	}
+.w_center_icon6{
+	background:url(../images/index_icon/iicon_06.png) no-repeat 0 0;
+	}
+.w_center_icon7{
+	background:url(../images/index_icon/iicon_07.png) no-repeat 0 0;
+	}
+.w_center_icon8{
+	background:url(../images/index_icon/iicon_02.png) no-repeat 0 0;
+	}
+.w_center_icon9{
+	background:url(../images/index_icon/iicon_03.png) no-repeat 0 0;
+	}
+.w_center_icon10{
+	background:url(../images/index_icon/iicon_04.png) no-repeat 0 0;
+	}
+.w_center_icon11{
+	background:url(../images/index_icon/iicon_05.png) no-repeat 0 0;
+	}
+.w_center_icon12{
+	background:url(../images/index_icon/iicon_06.png) no-repeat 0 0;
+	}

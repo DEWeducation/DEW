@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>“答尔文”登陆</title>
+		<link href="../css/angujlar.css" rel="stylesheet" type="text/css">
+		<link rel="shortcut icon" type="public/image/x-icon" href="../img/logo.ico" />
+	</head>
+
+	<body>
+		<h1 align="center"><b>"答尔文"欢迎你</b></h1>
+		<h2 align="center">登陆以获得联系</h2>
+		<div align="center">
+			<form action="../user/signin" method="post">
+			<!--<form>-->
+				<div class="biaodan">
+					<input name="name" type="text" size="20" maxlength="20" placeholder="Name" id="mail" style="border:#FBFBFB"><br>
+					<input name="password" type="text" size="20" maxlength="20" placeholder="Password" id="password" style="border:#FBFBFB"><br>
+				</div>
+				<br>
+
+				<input type="submit" value="登陆" id="login">
+			</form>
+			<div class="fp">
+				<a href="#" style="text-decoration:none; color:#000" target="_blank">忘记密码?</a>
+			</div>
+			<br>
+			<div class="do">
+				<a href="#" style="text-decoration:none; color:#999" target="_blank">还没有成为我们的会员?</a>
+			</div>
+
+			<form action="..." method="post">
+				<div class="caa">
+					<a  href="/getLoginUp" methods="get"><input type="button" value="创建账号" style="width:300px; height:40px; border:0px; background-color:#FFF; font-size:16px"></a>
+				</div>
+			</form>
+		</div>
+		<div class="foot">
+			<p align="center">Copyright &copy; 2015.Company name All rights reserved.</p>
+		</div>
+	</body>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+<script>
+//    $("#login").on("click",function () {
+//        $.post("../user/signin",{name:$("#mail").val(),password:$("#password").val()},function () {
+//            if(data.name=='null'){
+//                alert("用户名错误，请重新输入！")
+//            }else if(data.password=='null'){
+//                alert("密码错误，请重新输入！")
+//            }
+//            if(data.name!='null'&&data.password!='null')
+//            alert("欢迎你"+data.name)
+//        }).error(function () {
+//            alert("通讯问题")
+//        })
+//    })
+</script>
+</html>

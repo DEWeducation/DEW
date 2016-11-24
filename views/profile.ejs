@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh-CN" xml:lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta charset="UTF-8"/>
+    <title>个人中心</title>
+    <meta name="viewport" content="width=1226"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content="“答尔文" 在线家教/>
+    <link rel="stylesheet" href="../css/1.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../img/logo.ico"/>
+    <link rel="stylesheet" type="text/css" href="../css/2.css"/>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/icomoon-social.css">
+    <link rel="stylesheet" href="../css/icomoon-social.css">
+
+    <link rel="stylesheet" href="../css/leaflet.css"/>
+    <link rel="stylesheet" href="../css/main.css">
+
+    <script src="../js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <style>
+        #txtCon {
+            resize: none;
+            width: 180px;
+            height: 40px;
+        }
+
+        #onlya {
+            color: black;
+        }
+
+        #login {
+            position: absolute;
+            top: 50px;
+            right: 80px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="mainmenu-wrapper">
+    <div class="container">
+        <div class="menuextras"></div>
+        <nav id="mainmenu" class="mainmenu">
+            <ul>
+                <li class="logo-wrapper">
+                    <a href="index1.ejs"><img src="../img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a>
+                </li>
+                <li class="active">
+                    <a href="index1.ejs">首页</a>
+                </li>
+                <li>
+                    <a href="features.html">学习资讯</a>
+                </li>
+                <li class="has-submenu">
+                    <a href="#">在线答疑</a>
+                    <div class="mainmenu-submenu">
+                        <div class="mainmenu-submenu-inner">
+                            <div>
+                                <h4>Homepage</h4>
+                                <ul>
+                                    <li>
+                                        <a href="index1.ejs">回到首页</a>
+                                    </li>
+                                    <li>
+                                        <a href="introduce.html">“答尔文”介绍</a>
+                                    </li>
+                                </ul>
+                                <h4>悬赏金额</h4>
+                                <form>
+                                    <ul>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">5¥</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">10¥</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">15¥</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">20¥</a>
+                                        </li>
+                                    </ul>
+                                </form>
+                                <h4>辅导老师类型</h4>
+                                <form>
+                                    <ul>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">资深教师</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">一般教师</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">在校大学生</a>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <div>
+                                <h4>按教育阶段分类</h4>
+                                <form>
+                                    <ul>
+                                        <li>
+                                            <input type="radio" value="None" name="check" checked="checked"/>
+                                            <a href="#">小学教育</a>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="None" name="check"/>
+                                            <a href="#">初中教育</a>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="None" name="check"/>
+                                            <a href="#">高中教育</a>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="None" name="check"/>
+                                            <a href="#">大学教育</a>
+                                        </li>
+                                    </ul>
+                                </form>
+                                <h4>对应知识点</h4>
+                                <from>
+                                    <ul>
+                                        <li>
+                                            <input type="radio" value="None" name="check"/>
+                                            <a href="#">数和数的运算</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">度量衡</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">代数初步知识</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">几何的初步知识</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">简单的统计</a>
+                                        </li>
+                                    </ul>
+                                </from>
+                            </div>
+                            <div>
+                                <h4>按科目分类</h4>
+                                <from>
+                                    <ul>
+                                        <li><input type="radio" value="None" name="check1" checked="checked"/>
+                                            <a href="#">数学</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check1"/>
+                                            <a href="#">语文</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check1"/>
+                                            <a href="#">英语</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check1"/>
+                                            <a href="#">物理</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check1"/>
+                                            <a href="#">化学</a>
+                                        </li>
+                                    </ul>
+                                </from>
+                                <h4>教师要求</h4>
+                                <from>
+                                    <ul>
+                                        <li><input type="checkbox" value="None" name="check"/>
+                                            <a href="#">Blog Posts (List)</a>
+                                        </li>
+                                        <li><input type="checkbox" value="None" name="check"/>
+                                            <a href="#">Blog Single Post (Right Sidebar)</a>
+                                        </li>
+                                        <li><input type="checkbox" value="None" name="check"/>
+                                            <a href="#">Blog Single Post (Left Sidebar)</a>
+                                        </li>
+                                        <li><input type="checkbox" value="None" name="check"/>
+                                            <a href="#">Latest & Featured News</a>
+                                        </li>
+                                        <li>
+                                            <p>
+                                            <h5>对教师的其他要求</h5></p>
+                                        </li>
+                                        <li>
+                                            <textarea id="txtCon" name="message"></textarea>
+                                        </li>
+                                        <a id="onlya" href="sumbit.ejs"><input type="button" value="提交"></a>
+                                    </ul>
+                                </from>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="people.html">个人中心（我的储物箱）</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="login">
+            <a href="Angular.html">登陆</a>
+            <a href="Be Angular.html">\注册</a>
+        </div>
+    </div>
+</div>
+
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="index1.ejs">首页</a><span class="sep">&gt;</span><span>个人中心</span></div>
+</div>
+
+<div class="page-main user-main">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="uc-box uc-sub-box">
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">订单中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li>
+                                    <a href="#">我的订单</a>
+                                </li>
+                                <li>
+                                    <a href="#">团购订单</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-count="comment" data-count-style="bracket">评价晒单</a>
+                                </li>
+                                <li>
+                                    <a href="#">学币充值</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">个人中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li class="active">
+                                    <a href="#">我的个人中心</a>
+                                </li>
+                                <li>
+                                    <a href="#">云错题集</a>
+                                </li>
+                                <li>
+                                    <a href="#">错题练习</a>
+                                </li>
+                                <li>
+                                    <a href="">开课</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">我的个人管理</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li>
+                                    <a href="#">个人信息</a>
+                                </li>
+                                <li>
+                                    <a href="#">修改密码</a>
+                                </li>
+                                <li>
+                                    <a href="#">VIP认证</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/leaflet.js"></script>
+<script src="../js/jquery.fitvids.js"></script>
+<script src="../js/jquery.sequence-min.js"></script>
+<script src="../js/jquery.bxslider.js"></script>
+<script src="../js/main-menu.js"></script>
+<script src="../js/template.js"></script>
+
+</html>

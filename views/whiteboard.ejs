@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>在线答疑</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/icomoon-social.css">
+    <link rel="stylesheet" href="../css/1.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../img/logo.ico"/>
+    <link rel="stylesheet" href="../css/leaflet.css"/>
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!--<link href="css/bootstrap.css" rel="stylesheet" type="text/css">-->
+    <script src="../js/jquery-1.12.3.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="../js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <style>
+        #txtCon {
+            resize: none;
+            width: 180px;
+            height: 40px;
+        }
+
+        #onlya {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+<div class="mainmenu-wrapper">
+    <div class="container">
+        <div class="menuextras">
+        </div>
+        <nav id="mainmenu" class="mainmenu">
+            <ul>
+                <li class="logo-wrapper">
+                    <a href="index1.ejs"><img src="../img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a>
+                </li>
+                <li class="active">
+                    <a href="index1.ejs">首页</a>
+                </li>
+                <li>
+                    <a href="features.html">学习资讯</a>
+                </li>
+                <li class="has-submenu">
+                    <a href="#">在线答疑</a>
+                    <div class="mainmenu-submenu">
+                        <div class="mainmenu-submenu-inner">
+                            <div>
+                                <h4>Homepage</h4>
+                                <ul>
+                                    <li>
+                                        <a href="index1.ejs">回到首页</a>
+                                    </li>
+                                    <li>
+                                        <a href="introduce.html">“答尔文”介绍</a>
+                                    </li>
+                                </ul>
+                                <h4>悬赏金额</h4>
+                                <form>
+                                    <ul>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">5¥</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">10¥</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">15¥</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">20¥</a>
+                                        </li>
+                                    </ul>
+                                </form>
+                                <h4>辅导老师类型</h4>
+                                <form>
+                                    <ul>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">资深教师</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">一般教师</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">在校大学生</a>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <div>
+                                <h4>按教育阶段分类</h4>
+                                <form>
+                                    <ul>
+                                        <li>
+                                            <input type="radio" value="None" name="check" checked="checked"/>
+                                            <a href="#">小学教育</a>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="None" name="check"/>
+                                            <a href="#">初中教育</a>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="None" name="check"/>
+                                            <a href="#">高中教育</a>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="None" name="check"/>
+                                            <a href="#">大学教育</a>
+                                        </li>
+                                    </ul>
+                                </form>
+                                <h4>对应知识点</h4>
+                                <from>
+                                    <ul>
+                                        <li>
+                                            <input type="radio" value="None" name="check"/>
+                                            <a href="#">数和数的运算</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">度量衡</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">代数初步知识</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">几何的初步知识</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check"/>
+                                            <a href="#">简单的统计</a>
+                                        </li>
+                                    </ul>
+                                </from>
+                            </div>
+                            <div>
+                                <h4>按科目分类</h4>
+                                <from>
+                                    <ul>
+                                        <li><input type="radio" value="None" name="check1" checked="checked"/>
+                                            <a href="#">数学</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check1"/>
+                                            <a href="#">语文</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check1"/>
+                                            <a href="#">英语</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check1"/>
+                                            <a href="#">物理</a>
+                                        </li>
+                                        <li><input type="radio" value="None" name="check1"/>
+                                            <a href="#">化学</a>
+                                        </li>
+                                    </ul>
+                                </from>
+                                <h4>教师要求</h4>
+                                <from>
+                                    <ul>
+                                        <li><input type="checkbox" value="None" name="check"/>
+                                            <a href="#">Blog Posts (List)</a>
+                                        </li>
+                                        <li><input type="checkbox" value="None" name="check"/>
+                                            <a href="#">Blog Single Post (Right Sidebar)</a>
+                                        </li>
+                                        <li><input type="checkbox" value="None" name="check"/>
+                                            <a href="#">Blog Single Post (Left Sidebar)</a>
+                                        </li>
+                                        <li><input type="checkbox" value="None" name="check"/>
+                                            <a href="#">Latest & Featured News</a>
+                                        </li>
+                                        <li>
+                                            <p>
+                                            <h5>对教师的其他要求</h5></p>
+                                        </li>
+                                        <li>
+                                            <textarea id="txtCon" name="message"></textarea>
+                                        </li>
+                                        <a id="onlya" href="sumbit.ejs"><input type="button" value="提交"></a>
+                                    </ul>
+                                </from>
+                            </div>
+                        </div>
+                    </div>
+                <li>
+                    <a href="people.html">个人中心（我的储物箱）</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div id="Xboard">
+
+    <div id="allChat">
+        <div id="chatHistory">
+
+        </div>
+        <div id="chatInput">
+            <input id="chatText" type="text" placeholder="说点什么。。。">
+        </div>
+        <div id="movePhone">
+            <!--<input type="checkbox" id="audioBtn">-->
+
+        </div>
+        <div id="openPad"></div>
+    </div>
+    <div class="pad" id="pad">
+        <div id="maxPad"></div>
+        <div id="toolBar">
+            <div id="move"></div>
+            <div id="colLine">
+                <div id="colLine1" onclick="chooseColLine('colLine')"></div>
+                <div id="colLine2" onclick="chooseColLine('col')"></div>
+                <div id="colLine3" onclick="chooseColLine('none')"></div>
+            </div>
+            <div id="pencil"></div>
+            <div id="line"></div>
+            <div id="tuxing">
+                <div id="sanjian"></div>
+                <div id="zhijiaosanjiao"></div>
+                <div id="fang"></div>
+                <div id="jvxing"></div>
+                <div id="yuan"></div>
+            </div>
+
+            <div id="colorbar">
+                <div id="red" onclick="chooseColor('R')"></div>
+                <div id="black" onclick="chooseColor('B')"></div>
+                <div id="yellow" onclick="chooseColor('Y')"></div>
+            </div>
+            <div id="rubber"></div>
+            <div id="sizebar">
+                <!--<div class=" dropdown-toggle xiala" data-toggle="dropdown">*</div>-->
+                <!--<ul class="dropdown-menu hello">-->
+                    <!--<li><a id="sizea" onclick="chooseSize('1')">1</a></li>-->
+                    <!--<li><a id="sizeb" onclick="chooseSize('2')">2</a></li>-->
+                    <!--<li><a id="sizec" onclick="chooseSize('3')">3</a></li>-->
+                <!--</ul>-->
+                <div id="sizea" onclick="chooseSize('1')"></div>
+                <div id="sizeb" onclick="chooseSize('2')"></div>
+                <div id="sizec" onclick="chooseSize('3')"></div>
+                <div id="sized" onclick="chooseSize('4')"></div>
+                <div id="sizee" onclick="chooseSize('5')"></div>
+            </div>
+            <div id="text"></div>
+            <div id="clearAll"></div>
+            <div id="recover"></div>
+            <input id="jindutiao" type="range" min="1" max="1000" value="1">
+
+        </div>
+        <div class="audioPhoneO" id="audioPhone"></div>
+        <div id="canvasdiv">
+            <canvas width="790" height="600" id="canvas0"></canvas>
+            <canvas width="790" height="600" id="canvas1"></canvas>
+            <canvas width="790" height="600" id="canvas2"></canvas>
+        </div>
+        <input id="canvasInput" type="text" autofocus="autofocus">
+        <div id="closePad"></div>
+        <div id="up"></div>
+        <div id="down"></div>
+    </div>
+</div>
+
+
+<button id="btnidid">reAudio</button>
+<button id="reAudioAndDraw">回放视频</button>
+</body>
+
+<!--<script src="js/jquery-1.9.1.min.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
+<script src="../js/leaflet.js"></script>
+<script src="../js/jquery.fitvids.js"></script>
+<script src="../js/jquery.sequence-min.js"></script>
+<script src="../js/jquery.bxslider.js"></script>
+<script src="../js/main-menu.js"></script>
+<script src="../js/template.js"></script>
+
+<script src="../js/mainDraw.js"></script>
+<script src="../js/animate.js"></script>
+<script src="../js/chat.js"></script>
+<script src="../js/reDraw.js"></script>
+<script src="../js/main.js"></script>
+<link href="../css/app.css" rel="stylesheet" type="text/css">
+
+</html>

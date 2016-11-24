@@ -1,0 +1,9 @@
+@charset "utf-8";
+body{background-color:#EBEBEB;}
+#mail{color:#CCC; width:300px; height:30px; padding:10px; background-color:#FFF; border:0px; margin:2px;}
+#password {color:#CCC; width:300px; height:30px; padding:10px; background-color:#FFF; border:0px; }
+.biaodan {border-color:#FCFCFC;}
+#login { width:300px; height:40px; background-color:#96C; border:0px; color:#FFF; font-size:18px}
+.fp { margin:10px; text-decoration:none}
+.do { color:#999; margin:10px; text-decoration:none;}
+.foot {top:600px; color:#999; font-size:14px}

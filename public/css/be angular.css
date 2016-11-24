@@ -1,0 +1,10 @@
+@charset "utf-8";
+body{background-color:#EBEBEB;}
+#name {color:#CCC; width:300px; height:30px; padding:10px; background-color:#FFF; border:0px; margin:1px;}
+#mail {color:#CCC; width:300px; height:30px; padding:10px; background-color:#FFF; border:0px;margin:1px}
+#password {color:#CCC; width:300px; height:30px; padding:10px; background-color:#FFF; border:0px; margin:1px;}
+#foot {top:600px; color:#999; font-size:14px}
+#policy {margin:10px;}
+#a {margin:10px;}
+#signup { width:300px; height:40px; background-color:#96C; border:0px; color:#FFF; font-size:18px; margin:10px;}
+#signin { width:300px; height:40px; background-color:#FFF; border:0px; color:#000; font-size:18px; margin:10px}

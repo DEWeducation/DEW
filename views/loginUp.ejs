@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>“答尔文”注册</title>
+    <link href="../css/be angular.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" type="public/image/x-icon" href="../img/logo.ico"/>
+</head>
+
+<body>
+<h1 align="center"><b>"答尔文"欢迎你</b></h1>
+<h2 align="center">请按下列方式注册账号</h2>
+<div align="center">
+    <!--<form action="../user/signup" method="post">-->
+    <form>
+
+        <input name="name" type="text" size="20" maxlength="20" placeholder="Name" id="name">
+        <br>
+        <!--<input name="email" type="text" size="20" maxlength="20" placeholder="Email" id="mail">-->
+        <!--<br>-->
+        <input name="password" type="text" size="20" maxlength="20" placeholder="Password" id="password">
+        <br>
+        <label for="policy" style="position:relative; left:-50px">
+            <input name="policy" type="checkbox" id="policy">同意的条款和政策
+        </label>
+        <br>
+        <!--<a href="Angular.html"><input type="button" value="注册" id="signup"></a><br>-->
+        <input type="button" value="注册" id="signup"><br>
+
+        <div id="a">
+            <a style="text-decoration:none; color:#666">你已经拥有账号了？</a><br>
+        </div>
+        <a href="/getLoginIn" method="get"><input type="button" value="登陆" id="signin"></a>
+
+        <br>
+    </form>
+</div>
+<div id="foot">
+    <p align="center">Copyright &copy; 2015.Company name All rights reserved.</p>
+</div>
+</body>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script>
+    $("#signup").on("click", function () {
+        $.post("/signup", {name: $("#name").val(), password: $("#password").val()}, function (data) {
+            if (data.info == 'suss') {
+                alert("注册成功")
+            } else if (data.password == 'err') {
+                alert("用户名已存在！")
+            }
+
+        }).error(function () {
+            alert("通讯问题")
+        })
+    })
+</script>
+</html>

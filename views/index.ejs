@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!--<title>“答尔文”一对一在线辅导</title>-->
+		<title><%= title %></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/1.css" />
+		<link rel="shortcut icon" type="image/x-icon" href="../img/logo.ico" />
+		<link rel="stylesheet" href="../css/icomoon-social.css">
+		<link rel="stylesheet" href="../css/leaflet.css" />
+		<link rel="stylesheet" href="../css/main.css">
+
+		<script src="../js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		<style>
+			#txtCon {
+				resize: none;
+				width: 180px;
+				height: 40px;
+			}
+			
+			#login {
+				position: absolute;
+				top: 50px;
+				right: 80px;
+			}
+			
+			#onlya {
+				color: black;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Navigation & Logo-->
+		<div class="mainmenu-wrapper">
+			<div class="container">
+				<div class="menuextras">
+				</div>
+				<nav id="mainmenu" class="mainmenu">
+					<ul>
+						<li class="logo-wrapper">
+							<a href="index1.ejs"><img src="../img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a>
+						</li>
+						<li class="active">
+							<a href="index1.ejs">首页</a>
+						</li>
+						<li>
+							<a href="features.html">学习资讯</a>
+						</li>
+						<li class="has-submenu">
+							<a href="#">在线答疑</a>
+							<div class="mainmenu-submenu">
+								<div class="mainmenu-submenu-inner">
+									<div>
+										<h4>Homepage</h4>
+										<ul>
+											<li>
+												<a href="index1.ejs">回到首页</a>
+											</li>
+											<li>
+												<a href="introduce.html">“答尔文”介绍</a>
+											</li>
+										</ul>
+										<h4>悬赏金额</h4>
+										<form>
+											<ul>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">5¥</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">10¥</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">15¥</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">20¥</a>
+												</li>
+											</ul>
+										</form>
+										<h4>辅导老师类型</h4>
+										<form>
+											<ul>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">资深教师</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">一般教师</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">在校大学生</a>
+												</li>
+											</ul>
+										</form>
+									</div>
+									<div>
+										<h4>按教育阶段分类</h4>
+										<form>
+											<ul>
+												<li>
+													<input type="radio" value="None" name="check" checked="checked" />
+													<a href="#">小学教育</a>
+												</li>
+												<li>
+													<input type="radio" value="None" name="check" />
+													<a href="#">初中教育</a>
+												</li>
+												<li>
+													<input type="radio" value="None" name="check" />
+													<a href="#">高中教育</a>
+												</li>
+												<li>
+													<input type="radio" value="None" name="check" />
+													<a href="#">大学教育</a>
+												</li>
+											</ul>
+										</form>
+										<h4>对应知识点</h4>
+										<from>
+											<ul>
+												<li>
+													<input type="radio" value="None" name="check" />
+													<a href="#">数和数的运算</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">度量衡</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">代数初步知识</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">几何的初步知识</a>
+												</li>
+												<li><input type="radio" value="None" name="check" />
+													<a href="#">简单的统计</a>
+												</li>
+												</ul>
+										</from>
+									</div>
+									<div>
+										<h4>按科目分类</h4>
+										<from>
+											<ul>
+												<li><input type="radio" value="None" name="check1" checked="checked" />
+													<a href="#">数学</a>
+												</li>
+												<li><input type="radio" value="None" name="check1" />
+													<a href="#">语文</a>
+												</li>
+												<li><input type="radio" value="None" name="check1" />
+													<a href="#">英语</a>
+												</li>
+												<li><input type="radio" value="None" name="check1" />
+													<a href="#">物理</a>
+												</li>
+												<li><input type="radio" value="None" name="check1" />
+													<a href="#">化学</a>
+												</li>
+											</ul>
+										</from>
+										<h4>教师要求</h4>
+										<from>
+											<ul>
+												<li><input type="checkbox" value="None" name="check" />
+													<a href="#">Blog Posts (List)</a>
+												</li>
+												<li><input type="checkbox" value="None" name="check" />
+													<a href="#">Blog Single Post (Right Sidebar)</a>
+												</li>
+												<li><input type="checkbox" value="None" name="check" />
+													<a href="#">Blog Single Post (Left Sidebar)</a>
+												</li>
+												<li><input type="checkbox" value="None" name="check" />
+													<a href="#">Latest & Featured News</a>
+												</li>
+												<li>
+													<p>
+														<h5>对教师的其他要求</h5></p>
+												</li>
+												<li>
+													<textarea id="txtCon" name="message"></textarea>
+												</li>
+												<a id="onlya" href="/orderList"><input type="button" value="提交"></a>
+											</ul>
+										</from>
+									</div>
+								</div>
+							</div>
+							<li>
+								<a href="people.html">个人中心（我的储物箱）</a>
+							</li>
+							</ul>
+				</nav>
+				<div id="login">
+				
+				</div>
+			</div>
+		</div>
+
+		<div class="homepage-slider">
+			<div id="sequence">
+				<ul class="sequence-canvas">
+					<li class="bg4">
+						<h2 class="title">你问我答</h2>
+						<h3 class="subtitle">一对一在线答疑，分类标签，悬赏金额，帮助学生得到最好的讲解</h3>
+					</li>
+					<li class="bg3">
+						<h2 class="title">云错题集</h2>
+						<h3 class="subtitle">特有的错题分类机制，完美的题库匹配机制，让学生再也不怕考试</h3>
+					</li>
+					<li class="bg1">
+						<h2 class="title">约课拼课</h2>
+						<h3 class="subtitle">线上线下约课拼课，满足你的需求，减少你的费用，给予你最大的辅导享受</h3>
+					</li>
+				</ul>
+				<div class="sequence-pagination-wrapper">
+					<ul class="sequence-pagination">
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-6">
+						<div class="in-press press-wired">
+							<a href="#">在寻求真理的长河中，唯有学习，不断地学习，勤奋地学习，有创造性地学习，才能越重山跨峻岭。</a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="in-press press-mashable">
+							<a href="#">现在，我怕的并不是那艰苦严峻的生活，而是不能再学习和认识我迫切想了解的世界。对我来说，不学习，毋宁死。</a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="in-press press-techcrunch">
+							<a href="#">谁在装束和发型上用尽心思，谁就没有精力用于学习；谁只注意修饰外表的美丽，谁就无法得到内在的美丽。</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-6">
+						<div class="service-wrapper">
+							<img src="../img/service-icon/diamond.png" alt="Service 1">
+							<h3>你问我答</h3>
+							<p>一对一在线答疑，分类标签，悬赏金额，帮助学生得到最好的讲解</p>
+							<a href="#" class="btn">了解更多</a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="service-wrapper">
+							<img src="../img/service-icon/ruler.png" alt="Service 2">
+							<h3>云错题集</h3>
+							<p>特有的错题分类机制，完美的题库匹配机制，让学生再也不怕考试</p>
+							<a href="#" class="btn">了解更多</a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="service-wrapper">
+							<img src="../img/service-icon/box.png" alt="Service 3">
+							<h3>约课拼课</h3>
+							<p>线上线下约课拼课，满足你的需求，减少你的费用，给予你最大的辅导享受</p>
+							<a href="#" class="btn">了解更多</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section">
+			<div class="container">
+				<h2>悬赏金额</h2>
+				<div class="row">
+					<div class="pricing-wrapper col-md-12">
+						<div class="pricing-plan">
+							<div class="ribbon-wrapper">
+								<div class="price-ribbon ribbon-red">Popular</div>
+							</div>
+							<h2 class="pricing-plan-title">开始</h2>
+							<p class="pricing-plan-price">免费</p>
+							<ul class="pricing-plan-features">
+								<li><strong>1</strong> 次</li>
+								<li><strong>持续</strong> 时间</li>
+								<li><strong>10</strong> 分钟</li>
+							</ul>
+							<a href="index1.ejs" class="btn">欢迎进入</a>
+						</div>
+						<div class="pricing-plan">
+							<h2 class="pricing-plan-title">发展</h2>
+							<p class="pricing-plan-price">49<span>/mo</span></p>
+							<ul class="pricing-plan-features">
+								<li><strong>10</strong> users</li>
+								<li><strong>Unlimited</strong> projects</li>
+								<li><strong>20GB</strong> storage</li>
+							</ul>
+							<a href="index1.ejs" class="btn">欢迎进入</a>
+						</div>
+						<div class="pricing-plan pricing-plan-promote">
+							<h2 class="pricing-plan-title">高潮</h2>
+							<p class="pricing-plan-price">$99<span>/mo</span></p>
+							<ul class="pricing-plan-features">
+								<li><strong>Unlimited</strong> users</li>
+								<li><strong>持续</strong> 时间</li>
+								<li><strong>100GB</strong> storage</li>
+							</ul>
+							<a href="index1.ejs" class="btn">欢迎进入</a>
+						</div>
+						<div class="pricing-plan">
+							<div class="ribbon-wrapper">
+								<div class="price-ribbon ribbon-green">New</div>
+							</div>
+							<h2 class="pricing-plan-title">学有所成</h2>
+							<p class="pricing-plan-price">$199<span>/mo</span></p>
+							<ul class="pricing-plan-features">
+								<li><strong>Unlimited</strong> users</li>
+								<li><strong>持续</strong> 时间</li>
+								<li><strong>100GB</strong> storage</li>
+							</ul>
+							<a href="index1.ejs" class="btn">欢迎进入</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="footer-copyright">Copyright &copy; 2015.Company name All rights reserved.</div>
+			</div>
+		</div>
+		</div>
+		</div>
+
+	</body>
+	<script src="../js/jquery-1.9.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/leaflet.js"></script>
+	<script src="../js/jquery.fitvids.js"></script>
+	<script src="../js/jquery.sequence-min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/main-menu.js"></script>
+	<script src="../js/template.js"></script>
+<script>
+	$("#out").on("click",function () {
+		if($("#out").html()=="退出"){
+			$("#out").attr("href","/logout")
+		}
+	})
+</script>
+</html>

@@ -1,0 +1,411 @@
+
+* {
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    position: absolute;
+    margin: 0;
+    right: 0;
+}
+
+#canvas0 {
+    background-color: #F8F8FF;
+    z-index: 0;
+}
+
+audio {
+    width: 260px;
+}
+
+.pad {
+    width: 830px;
+    height: 600px;
+    border: 60px solid black;
+    border-radius: 50px;
+    position: absolute;
+    top: 100px;
+    left: 360px;
+}
+
+#toolBar {
+    width: 40px;
+    height: 100%;
+    float: left;
+    background: #999999;
+    overflow: visible;
+    z-index: 3;
+}
+#maxPad{
+    position: absolute;
+    width:30px;
+    height:30px;
+    background: url("../img/max.png");
+    background-size: contain;
+    right:0;
+    z-index: 3;
+}
+
+#toolBar > div {
+    margin-top: 6px;
+    /*margin: 3px;*/
+    width: 40px;
+    height: 40px;
+    /*border:1px solid firebrick;*/
+    overflow: visible;
+}
+
+#move {
+    cursor: move;
+    background: url("../img/move.png");
+    background-size: contain;
+}
+
+#colLine {
+    background: url("../img/colLine.png");
+    background-size: contain;
+}
+
+#colLine div {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background-color: #CCCCCC;
+    /*border:1px solid black;*/
+    position: relative;
+    left: 40px;
+    z-index: 5;
+}
+
+#colLine1 {
+    background: url("../img/colLine.png");
+    background-size: contain;
+}
+
+#colLine2 {
+    background: url("../img/colLine1.png");
+    background-size: contain;
+}
+
+#pencil {
+    background: url("../img/pencil.png");
+    background-size: contain;
+}
+
+#line {
+    background: url("../img/line_512px_1125505_easyicon.net.png");
+    background-size: contain;
+}
+#tuxing{
+    background: url("../img/sanjianxing.png");
+    background-size: contain;
+}
+#sanjian {
+    background: url("../img/sanjianxing.png");
+    background-size: contain;
+    overflow: visible;
+}
+
+#tuxing div {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background-color: #CCCCCC;
+    /*border:1px solid black;*/
+    position: relative;
+    left: 40px;
+    z-index: 5;
+}
+#colorbar div{
+    display: none;
+    width: 30px;
+    height: 30px;
+    /*background-color: #CCCCCC;*/
+    /*border:1px solid black;*/
+    position: relative;
+    left: 40px;
+    z-index: 5;
+}
+#sizebar div{
+    display: none;
+    width: 30px;
+    height: 28px;
+    background-color: #CCCCCC;
+    /*border:1px solid black;*/
+    position: relative;
+    left: 40px;
+    z-index: 5;
+}
+
+#zhijiaosanjiao {
+    background: url("../img/zhijiao.png");
+    background-size: contain;
+}
+
+#yuan {
+    background: url("../img/Circle_244px_1198167_easyicon.net.png");
+    background-size: contain;
+}
+
+#fang {
+    background: url("../img/Square_343px_1198766_easyicon.net.png");
+    background-size: contain;
+}
+
+#jvxing {
+    background: url("../img/jvxing.png");
+    background-size: contain;
+}
+
+#colorbar {
+    background: url("../img/color-1.png");
+    background-size: contain;
+}
+
+#sizebar {
+    background: url("../img/wordB.png");
+    background-size: contain;
+}
+#sizea {
+    background: url("../img/line1.png");
+    background-size: contain;
+}
+#sizeb {
+    background: url("../img/line2.png");
+    background-size: contain;
+}
+#sizec {
+    background: url("../img/line3.png");
+    background-size: contain;
+}
+#sized {
+    background: url("../img/line4.png");
+    background-size: contain;
+}
+#sizee {
+    background: url("../img/line5.png");
+    background-size: contain;
+}
+#rubber {
+    background: url("../img/rubber_364.00320512821px_1147003_easyicon.net.png");
+    background-size: contain;
+}
+
+#text {
+    background: url("../img/wordT (2).png");
+    background-size: contain;
+}
+
+#clearAll {
+    background: url("../img/wordC.png");
+    background-size: contain;
+}
+
+#recover {
+    background: url("../img/wordR.png");
+    background-size: contain;
+}
+
+#canvasdiv {
+    /*background-color: #cccccc;*/
+    width: 790px;
+    height: 600px;
+    /*position: relative;*/
+    /*left: 40px;*/
+}
+
+#canvasInput {
+    font-size: 40px;
+    width: 785px;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    z-index: 2;
+}
+
+#closePad {
+    width: 45px;
+    height: 45px;
+    background-color: #111111;
+    border: 3px solid sandybrown;
+    border-radius: 30px;
+    position: absolute;
+    left: 400px;
+    bottom: -57px;
+}
+
+#openPad {
+    background-color: #111111;
+    border-radius: 30px;
+    border: 3px solid sandybrown;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 1px;
+    left: 130px;
+}
+
+#up {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 840px;
+    bottom: 70px;
+    background: url("../img/up.png");
+    background-size: contain;
+}
+
+#down {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 840px;
+    bottom: 20px;
+    background: url("../img/down.png");
+    background-size: contain;
+}
+
+.xiala {
+    width: 40px;
+    height: 40px;
+}
+
+.dropdown-menu {
+    top: auto;
+}
+
+#red {
+    background-color: red;
+}
+
+#black {
+    background-color: black;
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#allChat {
+    position: absolute;
+    top: 100px;
+    height: 650px;
+    background: #cccccc;
+    width: 300px;
+    border-style: solid;
+    border-top-width: 40px;
+    border-left-width: 20px;
+    border-right-width: 20px;
+    border-bottom: 10px;
+    border-color: #000000;
+    /*border: 20px solid #000;*/
+    border-radius: 20px;
+}
+
+#chatHistory {
+    overflow-x: hidden;
+    /*overflow: scroll;*/
+    font-size: 18px;
+    height: 550px;
+    background: #cccccc;
+}
+
+#chatInput {
+    height: 50px;
+}
+
+#chatText {
+    overflow: scroll;
+    font-size: 20px;
+    width: 298px;
+    height: 50px;
+}
+
+#movePhone {
+    cursor: move;
+    background-color: #111111;
+    width: 300px;
+    height: 50px;
+}
+
+.chatMsg {
+    padding: 5px 5px 5px 8px;
+    float: right;
+    word-break: break-all;
+    max-width: 220px;
+    background: #f0ad4e;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+
+.chatMsgOther {
+    padding: 5px;
+    float: left;
+    left: 5px;
+    word-break: break-all;
+    max-width: 220px;
+    background-color: #f0ad4e;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 100px;
+    border-radius: 10px;
+}
+
+.chatAudio {
+    float: right;
+    margin: 5px;
+}
+
+.chatAudioOther {
+    float: left;
+}
+
+.audioPhoneO {
+    position: absolute;
+    /*background: red;*/
+    width: 50px;
+    height: 50px;
+    top: -55px;
+    left: 400px;
+    background: url("../img/telephone1.png");
+    background-size: contain;
+}
+
+.audioPhoneT {
+    position: absolute;
+    /*background: red;*/
+    width: 50px;
+    height: 50px;
+    top: -55px;
+    left: 400px;
+    background: url("../img/telphont2.png");
+    background-size: contain;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 0, 0, 0.4);
+}
