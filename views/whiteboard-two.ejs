@@ -3,12 +3,22 @@
 <head>
     <title>WhiteBoard-Two</title>
     <link rel="stylesheet" href="../css/whiteboard-two.css">
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
 </head>
 
 <body>
     <div id="world">
         <div id="whiteboard">
-
+            <div id="canvasdiv">
+                <canvas id="canvas0"></canvas>
+                <canvas id="canvas1"></canvas>
+                <canvas id="canvas2"></canvas>
+            </div>
         </div>
         <div id="tools-pannel">
             <div id="rule"></div>
@@ -22,9 +32,7 @@
             <div id="trash"></div>
         </div>
         <a onclick="fullScreen()">
-            <div id="maximize-icon">
-
-            </div>
+            <div id="maximize-icon"></div>
         </a>
         <div id="video-icon">
 
@@ -32,11 +40,45 @@
     </div>
 </body>
 <script>
+    var docment = document.documentElement;
+    var maximize = document.getElementById('maximize-icon');
+
+    $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function () {
+        var isFullScreen = document.fullScreen ||
+            document.mozFullScreen ||
+            document.webkitIsFullScreen;
+        if (isFullScreen) {
+            $(maximize).on('click', exitFullScreen)
+            maximize.style.backgroundImage = "url(../img/whiteboard-tools/trash.png)"
+        } else {
+            $(maximize).on('click', fullScreen)
+            maximize.style.backgroundImage = "url(../img/whiteboard-tools/maximize.png)"
+        }
+
+    })
+
     function fullScreen() {
-        a = document.documentElement;
-        a.requestFullscreen ? a.requestFullscreen() : a.mozRequestFullScreen ? a.mozRequestFullScreen() : a.webkitRequestFullscreen ? a.webkitRequestFullscreen() : a.msRequestFullscreen && a.msRequestFullscreen()
+        document.requestFullscreen ? docment.requestFullscreen() :
+            docment.mozRequestFullScreen ? docment.mozRequestFullScreen() :
+                docment.webkitRequestFullscreen ? docment.webkitRequestFullscreen() :
+                    docment.msRequestFullscreen && docment.msRequestFullscreen();
+    }
+    function exitFullScreen() {
+        document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen()
     }
 
 </script>
+<script src="../js/leaflet.js"></script>
+<script src="../js/jquery.fitvids.js"></script>
+<script src="../js/jquery.sequence-min.js"></script>
+<script src="../js/jquery.bxslider.js"></script>
+<script src="../js/main-menu.js"></script>
+<script src="../js/template.js"></script>
+
+<script src="../js/mainDraw.js"></script>
+<script src="../js/animate.js"></script>
+<script src="../js/chat.js"></script>
+<script src="../js/reDraw.js"></script>
+<script src="../js/main.js"></script>
 
 </html>

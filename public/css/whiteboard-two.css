@@ -96,3 +96,21 @@ html,body{
     background-image: url(../img/whiteboard-tools/trash.png);
     background-size: cover;
 }
+
+canvas {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%; 
+    width: 100%; 
+    display: block;
+}
+
+#canvas0 {
+    background-color: #F8F8FF;
+    z-index: 0;
+}
+#canvasdiv{
+    width: 100%;
+    height: 100%;
+}
