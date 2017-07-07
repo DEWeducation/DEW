@@ -1,14 +1,42 @@
 <html>
 
 <head>
-<title>WhiteBoard-Two</title>
-<link rel="stylesheet" href="../css/whiteboard-two.css">
+    <title>WhiteBoard-Two</title>
+    <link rel="stylesheet" href="../css/whiteboard-two.css">
 </head>
 
 <body>
-<div id="world">
+    <div id="world">
+        <div id="whiteboard">
 
-</div>
+        </div>
+        <div id="tools-pannel">
+            <div id="rule"></div>
+            <div id="pencil-one"></div>
+            <div id="pencil-two"></div>
+            <div id="paintbrush"></div>
+            <div id="color"></div>
+            <div id="rubber"></div>
+            <div id="shape"></div>
+            <div id="word"></div>
+            <div id="trash"></div>
+        </div>
+        <a href="" onclick="fullScreen()">
+            <div id="maximize-icon">
+
+            </div>
+        </a>
+        <div id="video-icon">
+
+        </div>
+    </div>
 </body>
+<script>
+    function fullScreen() {
+        a = document.documentElement;
+        a.requestFullscreen ? a.requestFullscreen() : a.mozRequestFullScreen ? a.mozRequestFullScreen() : a.webkitRequestFullscreen ? a.webkitRequestFullscreen() : a.msRequestFullscreen && a.msRequestFullscreen()
+    }
+
+</script>
 
 </html>

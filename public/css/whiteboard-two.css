@@ -3,9 +3,95 @@ html,body{
     padding: 0;
     width: 100%;
     height: 100%;
+    min-width: 1000px;
 }
+
 #world{
     width: 100%;
     height: 100%;
-    background-color: #ff55aa;
+    background-color: #ccc;
+}
+#whiteboard{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000;
+    width: 95%;
+    height: 95%;
+    background-color: #fff;
+}
+
+#tools-pannel{
+    position: absolute;
+    top: 92%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /*background-color: #fa2;*/
+    width: 548px;
+    height: 60px;
+}
+#tools-pannel>div{
+    margin: 0 -3px;
+    /*background-color: #4c9;*/
+    height: 60px;
+    width: 60px;
+    /*border: 1px solid #fff;*/
+    display: inline-block;
+}
+#maximize-icon{
+    z-index: 5;
+   position: absolute;
+   right: 3%;
+   top: 3%;
+    height: 60px;
+    width: 60px;
+    background-image: url(../img/whiteboard-tools/maximize.png);
+    background-size: cover;
+}
+#video-icon{
+    z-index: 5;
+   position: absolute;
+   left: 3%;
+   top: 3%;
+    height: 60px;
+    width: 60px;
+    background-image: url(../img/whiteboard-tools/video.png);
+    background-size: cover;
+}
+#rule{
+    background-image: url(../img/whiteboard-tools/rule.png);
+    background-size: cover;
+}
+#pencil-one{
+   background-image: url(../img/whiteboard-tools/pencil-one.png);
+    background-size: cover; 
+}
+#pencil-two{
+    background-image: url(../img/whiteboard-tools/pencil-two.png);
+    background-size: cover;
+}
+#paintbrush{
+    background-image: url(../img/whiteboard-tools/paintbrush.png);
+    background-size: cover;
+}
+#color{
+    background-image: url(../img/whiteboard-tools/color.png);
+    background-size: cover;
+}
+#rubber{
+    background-image: url(../img/whiteboard-tools/rubber.png);
+    background-size: cover;
+}
+#shape{
+    background-image: url(../img/whiteboard-tools/shape.png);
+    background-size: cover;
+}
+#word{
+    background-image: url(../img/whiteboard-tools/word.png);
+    background-size: cover;
+}
+#trash{
+    background-image: url(../img/whiteboard-tools/trash.png);
+    background-size: cover;
 }
