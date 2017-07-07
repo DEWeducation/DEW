@@ -13,7 +13,7 @@ module.exports = function (app) {
     })
 
     app.get('/whiteboard', function (req, res, next) {
-        res.render('whiteboard')
+        res.render('whiteboard-two')
     })
 
 };
