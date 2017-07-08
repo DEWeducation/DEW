@@ -4,7 +4,7 @@
 var canvas0, canvas1, canvas2, ctx0, ctx1, ctx2;
 //画在2上、画完印在1上、0用作翻页
 
-var penType = "pencil", penColer = "#000000", penSize = "2";
+var penType = "pencil", penColer = "#0000cc", penSize = "2";
 var canvasWidth = document.getElementById('canvasdiv').clientWidth;
 var canvasHeight = document.getElementById('canvasdiv').clientHeight;
 
@@ -33,6 +33,7 @@ $('#canvas2').css("z-index", 2);
         flat: true,
         layout: 'hex',
         submit: 0,
+        color:'0000cc',
         onChange: function (hsb, hex, rgb, el, bySetColor) {
           penColer = "#"+hex;
         }
