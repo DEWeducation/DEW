@@ -31,7 +31,7 @@ $('#canvas2').css("z-index", 2);
 
  $('#color').colpick({
         flat: true,
-        layout: 'full',
+        layout: 'hex',
         submit: 0,
         onChange: function (hsb, hex, rgb, el, bySetColor) {
           penColer = "#"+hex;

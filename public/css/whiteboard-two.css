@@ -77,10 +77,14 @@ html,body{
     background-image: url(../img/whiteboard-tools/pen3.svg);
     background-size: cover;
 }
-/*#color{
-    background-image: url(../img/whiteboard-tools/color.svg);
-    background-size: cover;
-}*/
+#color{
+ border: 21 solid rgba(1, 1, 1,1);
+}
+.colpick_color{
+    border-radius: 30px ;
+    overflow: hidden;
+}
+
 #rubber{
     background-image: url(../img/whiteboard-tools/rubber.svg);
     background-size: cover;
