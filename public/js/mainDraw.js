@@ -5,12 +5,12 @@ var canvas0, canvas1, canvas2, ctx0, ctx1, ctx2;
 //画在2上、画完印在1上、0用作翻页
 
 var penType = "pencil", penColer = "#000000", penSize = "2";
-canvasWidth = document.getElementById('canvasdiv').clientWidth;
-canvasHeight = document.getElementById('canvasdiv').clientHeight;
+var canvasWidth = document.getElementById('canvasdiv').clientWidth;
+var canvasHeight = document.getElementById('canvasdiv').clientHeight;
 
 var canvasOffsetTop = $("#canvasdiv").offset().top //canvas相对浏览器窗口的偏移量
 var canvasOffsetLeft = $("#canvasdiv").offset().left //canvas相对浏览器窗口的偏移量
-
+var canvasDiv = document.getElementById('canvasDiv');
 // $("#elem").position().top        //相对父元素的位置坐标：
 // $("#elem").position().left
 
@@ -29,6 +29,15 @@ ctx2 = canvas2.getContext('2d');
 $('#canvas1').css("z-index", 1);
 $('#canvas2').css("z-index", 2);
 
+ $('#color').colpick({
+        flat: true,
+        layout: 'full',
+        submit: 0,
+        onChange: function (hsb, hex, rgb, el, bySetColor) {
+          penColer = "#"+hex;
+        }
+    });
+
 // 回放相关
 var uptime = 0;
 var starTime = 0;
@@ -42,6 +51,23 @@ var maxPage = 0;
 
 //网格
 
+//canvas大小改变，重新绘制
+window.addEventListener("resize", resizeCanvas, false);
+
+function resizeCanvas() {
+    // w = canvas.width = window.innerWidth;
+    // h = canvas.height = window.innerHeight;
+   
+    if (penType != 'rubber') {
+        var image = new Image();
+        image.src = canvas2.toDataURL();
+
+        image.onload = function () {
+            ctx1.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasWidth, canvasHeight);
+            cleanCtx();
+        }
+    }
+}
 
 function chooseColLine(c) {
     ctx0.beginPath();
@@ -79,22 +105,7 @@ function chooseColLine(c) {
     }
 }
 
-function chooseColor(c) {
-    switch (c) {
-        case 'R':
-            penColer = '#B22222';
-            break;
-        case 'B':
-            penColer = '#000000';
-            break;
-        case 'Y':
-            penColer = '#ffcc00';
-            break;
-        default:
-            break;
-    }
-    return false;
-}
+
 
 function chooseSize(s) {
     penSize = s;
@@ -117,9 +128,9 @@ function mouseDown(e) {
     }
     e = e || window.event;
     starTime = new Date().getTime();
-    // socket.emit('downorup', 'down', downX, downY, e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop, penType, penColer, penSize, starTime);
+
     socket.emit('downorup', 'down', downX / canvasWidth, downY / canvasHeight, (e.clientX - canvasOffsetLeft) / canvasWidth, (e.clientY - canvasOffsetTop) / canvasHeight, penType, penColer, penSize, starTime);
-    // alert(canvasWidth)
+
     if (penType == 'text') {
         ctx2.fillStyle = penColer;
         ctx2.font = parseInt(penSize) * 10 + "px" + " Georgia";
@@ -129,7 +140,7 @@ function mouseDown(e) {
         // alert(CanvasMess)
     } else {
         CanvasMess = "";
-        // ctx2.moveTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
+
         ctx2.moveTo(downX, downY);
     }
 }
@@ -156,16 +167,16 @@ function mouseMove(e) {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(downX * 2 - (e.clientX - canvasOffsetLeft), e.clientY -canvasOffsetTop);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
+            ctx2.lineTo(downX * 2 - (e.clientX - canvasOffsetLeft), e.clientY - canvasOffsetTop);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'zhijiaosanjiao') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(downX, e.clientY -canvasOffsetTop);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
+            ctx2.lineTo(downX, e.clientY - canvasOffsetTop);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'jvxing') {
@@ -173,8 +184,8 @@ function mouseMove(e) {
             cleanCtx();
             ctx2.moveTo(downX, downY);
             ctx2.lineTo(e.clientX - canvasOffsetLeft, downY);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
-            ctx2.lineTo(downX, e.clientY -canvasOffsetTop);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
+            ctx2.lineTo(downX, e.clientY - canvasOffsetTop);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'fang') {
@@ -189,7 +200,7 @@ function mouseMove(e) {
         } else if (penType == 'yuan') {
             cleanCtx();
             ctx2.beginPath();
-            var radii = Math.sqrt((downX - e.clientX + canvasOffsetLeft) * (downX - e.clientX +canvasOffsetTop) + (downY - e.clientY + canvasOffsetTop) * (downY - e.clientY +canvasOffsetTop));
+            var radii = Math.sqrt((downX - e.clientX + canvasOffsetLeft) * (downX - e.clientX + canvasOffsetTop) + (downY - e.clientY + canvasOffsetTop) * (downY - e.clientY + canvasOffsetTop));
             ctx2.arc(downX, downY, radii, 0, Math.PI * 2, false);
             ctx2.stroke();
         } else if (penType == 'rubber') {
@@ -394,7 +405,7 @@ function handleStart(e) {
 
     canDraw = true;
     downX = touches[0].clientX - canvasOffsetLeft;
-    downY = touches[0].clientY -canvasOffsetTop;
+    downY = touches[0].clientY - canvasOffsetTop;
     ctx2.strokeStyle = penColer;
     ctx1.strokeStyle = penColer;
     ctx2.lineWidth = penSize;
@@ -404,8 +415,8 @@ function handleStart(e) {
     }
 
     starTime = new Date().getTime();
-    socket.emit('downorup', 'down', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, starTime);
-    console.log("star:", 'down', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, starTime);
+    socket.emit('downorup', 'down', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop, penType, penColer, penSize, starTime);
+    console.log("star:", 'down', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop, penType, penColer, penSize, starTime);
     if (penType == 'text') {
         ctx2.fillStyle = penColer;
         ctx2.font = parseInt(penSize) * 10 + "px" + " Georgia";
@@ -415,7 +426,7 @@ function handleStart(e) {
         // alert(CanvasMess)
     } else {
         CanvasMess = "";
-        ctx2.moveTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
+        ctx2.moveTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop);
     }
 
 }
@@ -426,8 +437,8 @@ function handleEnd(e) {
     var touches = e.changedTouches;
     canDraw = false;
     uptime = new Date().getTime();
-    socket.emit('downorup', 'up', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, uptime, CanvasMess);
-    console.log("End:", 'up', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, uptime, CanvasMess);
+    socket.emit('downorup', 'up', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop, penType, penColer, penSize, uptime, CanvasMess);
+    console.log("End:", 'up', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop, penType, penColer, penSize, uptime, CanvasMess);
     if (penType != 'rubber') {
         var image = new Image();
         image.src = canvas2.toDataURL();
@@ -468,32 +479,32 @@ function handleMove(e) {
         lastTime = new Date().getTime();
 
         if (penType == "pencil") {
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop);
             ctx2.stroke();
         }
         else if (penType == 'line') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop);
             ctx2.stroke();
             ctx2.closePath();
         }
         else if (penType == 'sanjian') {
             ctx2.beginPath();
             cleanCtx();
-            ctx2.moveTo(downX, touches[0].clientY -canvasOffsetTop);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
+            ctx2.moveTo(downX, touches[0].clientY - canvasOffsetTop);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop);
             ctx2.lineTo((downX + touches[0].clientX - canvasOffsetLeft) / 2, downY);
-            ctx2.lineTo(downX, touches[0].clientY -canvasOffsetTop);
+            ctx2.lineTo(downX, touches[0].clientY - canvasOffsetTop);
             ctx2.stroke();
         } else if (penType == 'jvxing') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
             ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, downY);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
-            ctx2.lineTo(downX, touches[0].clientY -canvasOffsetTop);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop);
+            ctx2.lineTo(downX, touches[0].clientY - canvasOffsetTop);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'fang') {
@@ -515,35 +526,35 @@ function handleMove(e) {
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
-            ctx2.moveTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop - penSize * 7);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY -canvasOffsetTop - penSize * 7);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY -canvasOffsetTop + penSize * 5);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop + penSize * 5);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop - penSize * 7);
+            ctx2.moveTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY - canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY - canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY - canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY - canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY - canvasOffsetTop - penSize * 7);
             ctx2.stroke();
             // ctx2.clearRect(e.clientX-98 - canvasLeft - penSize * 6, e.clientY-60 - canvasTop - penSize * 6, penSize * 12, penSize * 12);
-            ctx1.clearRect(touches[0].clientX - canvasOffsetLeft - penSize * 5, touches[0].clientY -canvasOffsetTop - penSize * 5, penSize * 10, penSize * 10);
+            ctx1.clearRect(touches[0].clientX - canvasOffsetLeft - penSize * 5, touches[0].clientY - canvasOffsetTop - penSize * 5, penSize * 10, penSize * 10);
         }
 
-        socket.emit('message', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, lastTime);
-        console.log('发送：', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, lastTime);
+        socket.emit('message', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop, penType, penColer, penSize, lastTime);
+        console.log('发送：', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop, penType, penColer, penSize, lastTime);
 
     } else if ((!canDraw) && downOrUp == 'up') {
         if (penType == 'yuan') {
             cleanCtx();
             ctx2.beginPath();
-            ctx2.arc(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, 10, 0, Math.PI * 2, false);
+            ctx2.arc(touches[0].clientX - canvasOffsetLeft, touches[0].clientY - canvasOffsetTop, 10, 0, Math.PI * 2, false);
             ctx2.stroke();
         } else if (penType == 'rubber') {
             // alert("jfk");
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
-            ctx2.moveTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop - penSize * 7);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY -canvasOffsetTop - penSize * 7);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY -canvasOffsetTop + penSize * 5);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop + penSize * 5);
-            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop - penSize * 7);
+            ctx2.moveTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY - canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY - canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY - canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY - canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY - canvasOffsetTop - penSize * 7);
             ctx2.stroke();
         }
     }
