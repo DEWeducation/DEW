@@ -1,4 +1,4 @@
 # DEW
---- npm install
+- npm install
 
---- node bin/www
+- node bin/www
