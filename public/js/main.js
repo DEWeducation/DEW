@@ -3,9 +3,9 @@
  */
 $(document).ready(function () {
 
-    $("#Xboard #pad,#allChat").draggable({stack: "#Xboard #pad,#allChat"})
-    $("#pad").draggable({handle: "#move"});
-    $("#allChat").draggable({handle: "#movePhone"});
+    $("#Xboard #pad,#allChat").draggable({ stack: "#Xboard #pad,#allChat" })
+    $("#pad").draggable({ handle: "#move" });
+    $("#allChat").draggable({ handle: "#movePhone" });
 
     $("#canvasInput").hide();
     $("#pad").hide();
@@ -33,13 +33,35 @@ $(document).ready(function () {
         reAudio();
     });
 
-    $('#line').click(function () {
+    $('#rule').click(function () {
         $("#canvasInput").hide();
 
         // init();
         penType = 'line';
         console.log(penType);
     });
+
+    $('#pencil-one').click(function () {
+        $("#canvasInput").hide();
+        penType = 'pencil';
+        chooseSize('1')
+        console.log("chooseSize 1")
+    });
+
+    $('#pencil-two').click(function () {
+        $("#canvasInput").hide();
+        penType = 'pencil';
+        chooseSize('3')
+        console.log("chooseSize 3")
+    });
+
+    $('#paintbrush').click(function () {
+        $("#canvasInput").hide();
+        penType = 'pencil';
+        chooseSize('5')
+        console.log("chooseSize 5")
+    });
+
     $('#pencil').click(function () {
         $("#canvasInput").hide();
 
@@ -86,7 +108,7 @@ $(document).ready(function () {
         // init();
         penType = 'yuan';
     });
-    $('#text').click(function () {
+    $('#word').click(function () {
 
         // init();
         textBoxShow();
@@ -118,6 +140,19 @@ $(document).ready(function () {
     });
     $("#down").click(function () {
         down();
+    });
+
+    $("#shape").bind('mouseover', function () {
+        $("#shape div").css({
+            display: "block"
+        });
+
+    });
+    $("#shape").bind('mouseout', function () {
+        $("#shape div").css({
+            display: "none"
+        });
+
     });
 
 });

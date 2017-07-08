@@ -47,7 +47,7 @@ html,body{
    top: 3%;
     height: 60px;
     width: 60px;
-    background-image: url(../img/whiteboard-tools/maximize.png);
+    background-image: url(../img/whiteboard-tools/maximize.svg);
     background-size: cover;
 }
 #video-icon{
@@ -57,43 +57,43 @@ html,body{
    top: 3%;
     height: 60px;
     width: 60px;
-    background-image: url(../img/whiteboard-tools/video.png);
+    background-image: url(../img/whiteboard-tools/video.svg);
     background-size: cover;
 }
 #rule{
-    background-image: url(../img/whiteboard-tools/rule.png);
+    background-image: url(../img/whiteboard-tools/rule.svg);
     background-size: cover;
 }
 #pencil-one{
-   background-image: url(../img/whiteboard-tools/pencil-one.png);
+   background-image: url(../img/whiteboard-tools/pen1.svg);
     background-size: cover; 
 }
 #pencil-two{
-    background-image: url(../img/whiteboard-tools/pencil-two.png);
+    background-image: url(../img/whiteboard-tools/pen2.svg);
     background-size: cover;
 }
 #paintbrush{
-    background-image: url(../img/whiteboard-tools/paintbrush.png);
+    background-image: url(../img/whiteboard-tools/pen3.svg);
     background-size: cover;
 }
 #color{
-    background-image: url(../img/whiteboard-tools/color.png);
+    background-image: url(../img/whiteboard-tools/color.svg);
     background-size: cover;
 }
 #rubber{
-    background-image: url(../img/whiteboard-tools/rubber.png);
+    background-image: url(../img/whiteboard-tools/rubber.svg);
     background-size: cover;
 }
 #shape{
-    background-image: url(../img/whiteboard-tools/shape.png);
+    background-image: url(../img/whiteboard-tools/shape.svg);
     background-size: cover;
 }
 #word{
-    background-image: url(../img/whiteboard-tools/word.png);
+    background-image: url(../img/whiteboard-tools/word.svg);
     background-size: cover;
 }
-#trash{
-    background-image: url(../img/whiteboard-tools/trash.png);
+#clearAll{
+    background-image: url(../img/whiteboard-tools/trash.svg);
     background-size: cover;
 }
 
@@ -113,4 +113,52 @@ canvas {
 #canvasdiv{
     width: 100%;
     height: 100%;
+}
+
+#shape div {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background-color: #CCCCCC;
+    /*border:1px solid black;*/
+    position: relative;
+    left: 40px;
+    top: -100px;
+    z-index: 5;
+}
+
+#sanjian {
+    background: url("../img/sanjianxing.png");
+    background-size: contain;
+    overflow: visible;
+}
+#zhijiaosanjiao {
+    background: url("../img/zhijiao.png");
+    background-size: contain;
+}
+
+#yuan {
+    background: url("../img/Circle_244px_1198167_easyicon.net.png");
+    background-size: contain;
+}
+
+#fang {
+    background: url("../img/Square_343px_1198766_easyicon.net.png");
+    background-size: contain;
+}
+
+#jvxing {
+    background: url("../img/jvxing.png");
+    background-size: contain;
+}
+
+#canvasInput {
+    font-size: 40px;
+    width: 785px;
+    height: 60px;
+    position: absolute;
+    z-index: 2;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

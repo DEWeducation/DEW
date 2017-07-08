@@ -2,10 +2,18 @@
  * Created by Qvjunping on 2016-07-11.
  */
 var canvas0, canvas1, canvas2, ctx0, ctx1, ctx2;
-var canvasWidth = 790, canvasHeight = 600;
+//画在2上、画完印在1上、0用作翻页
+
 var penType = "pencil", penColer = "#000000", penSize = "2";
-var DrivHeight = document.body.scrollHeight - 120;
-// var DrivWidth = 4 / 3 * (DrivHeight) - 40;
+canvasWidth = document.getElementById('canvasdiv').clientWidth;
+canvasHeight = document.getElementById('canvasdiv').clientHeight;
+
+var canvasOffsetTop = $("#canvasdiv").offset().top //canvas相对浏览器窗口的偏移量
+var canvasOffsetLeft = $("#canvasdiv").offset().left //canvas相对浏览器窗口的偏移量
+
+// $("#elem").position().top        //相对父元素的位置坐标：
+// $("#elem").position().left
+
 var downX, downY;//每次按下时的坐标
 var canDraw = false;
 var downOrUp = 'up';
@@ -89,37 +97,17 @@ function chooseColor(c) {
 }
 
 function chooseSize(s) {
-    switch (s) {
-        case '1':
-            penSize = 1;
-            break;
-        case '2':
-            penSize = 2;
-            break;
-        case '3':
-            penSize = 3;
-            break;
-        case '4':
-            penSize = 4;
-            break;
-        case '5':
-            penSize = 5;
-            break;
-    }
+    penSize = s;
     return false;
 }
 
 function mouseDown(e) {
-    // alert(document.getElementById('whiteboard').offsetLeft);
-    // alert("da")
+
     canDraw = true;
-    // downX = e.clientX - 98 - document.getElementById('whiteboard').offsetLeft;
-    //TODO
-    downX = e.clientX - document.getElementById('whiteboard').offsetLeft;
-    // alert("offsetLeft"+document.getElementById('whiteboard').offsetLeft)
-    // downY = e.clientY - 60 - document.getElementById('whiteboard').offsetTop;
-    //TODO
-    downY = e.clientY - document.getElementById('whiteboard').offsetTop;
+
+    downX = e.clientX - canvasOffsetLeft
+    downY = e.clientY - canvasOffsetTop
+
     ctx2.strokeStyle = penColer;
     ctx1.strokeStyle = penColer;
     ctx2.lineWidth = penSize;
@@ -129,8 +117,9 @@ function mouseDown(e) {
     }
     e = e || window.event;
     starTime = new Date().getTime();
-    // socket.emit('downorup', 'down', downX, downY, e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, starTime);
-    socket.emit('downorup', 'down', downX/canvasWidth, downY/canvasHeight, (e.clientX - 98 - document.getElementById('whiteboard').offsetLeft)/canvasWidth, (e.clientY - 60 - document.getElementById('whiteboard').offsetTop)/canvasHeight, penType, penColer, penSize, starTime);
+    // socket.emit('downorup', 'down', downX, downY, e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop, penType, penColer, penSize, starTime);
+    socket.emit('downorup', 'down', downX / canvasWidth, downY / canvasHeight, (e.clientX - canvasOffsetLeft) / canvasWidth, (e.clientY - canvasOffsetTop) / canvasHeight, penType, penColer, penSize, starTime);
+    // alert(canvasWidth)
     if (penType == 'text') {
         ctx2.fillStyle = penColer;
         ctx2.font = parseInt(penSize) * 10 + "px" + " Georgia";
@@ -140,7 +129,8 @@ function mouseDown(e) {
         // alert(CanvasMess)
     } else {
         CanvasMess = "";
-        ctx2.moveTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
+        // ctx2.moveTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
+        ctx2.moveTo(downX, downY);
     }
 }
 
@@ -150,14 +140,15 @@ function mouseMove(e) {
         lastTime = new Date().getTime();
 
         if (penType == "pencil") {
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            // ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
             ctx2.stroke();
         }
         else if (penType == 'line') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
             ctx2.stroke();
             ctx2.closePath();
         }
@@ -165,76 +156,76 @@ function mouseMove(e) {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(downX * 2 - (e.clientX - 98 - document.getElementById('whiteboard').offsetLeft), e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            ctx2.lineTo(downX * 2 - (e.clientX - canvasOffsetLeft), e.clientY -canvasOffsetTop);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'zhijiaosanjiao') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(downX, e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            ctx2.lineTo(downX, e.clientY -canvasOffsetTop);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'jvxing') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, downY);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
-            ctx2.lineTo(downX, e.clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, downY);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
+            ctx2.lineTo(downX, e.clientY -canvasOffsetTop);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'fang') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, downY);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, downY + e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - downX);
-            ctx2.lineTo(downX, downY + e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - downX);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, downY);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft, downY + e.clientX - canvasOffsetLeft - downX);
+            ctx2.lineTo(downX, downY + e.clientX - canvasOffsetLeft - downX);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'yuan') {
             cleanCtx();
             ctx2.beginPath();
-            var radii = Math.sqrt((downX - e.clientX + 98 + document.getElementById('whiteboard').offsetLeft) * (downX - e.clientX + 98 + document.getElementById('whiteboard').offsetLeft) + (downY - e.clientY + 60 + document.getElementById('whiteboard').offsetTop) * (downY - e.clientY + 60 + document.getElementById('whiteboard').offsetTop));
+            var radii = Math.sqrt((downX - e.clientX + canvasOffsetLeft) * (downX - e.clientX +canvasOffsetTop) + (downY - e.clientY + canvasOffsetTop) * (downY - e.clientY +canvasOffsetTop));
             ctx2.arc(downX, downY, radii, 0, Math.PI * 2, false);
             ctx2.stroke();
         } else if (penType == 'rubber') {
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
-            ctx2.moveTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, e.clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft + penSize * 5, e.clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft + penSize * 5, e.clientY - 60 - document.getElementById('whiteboard').offsetTop + penSize * 5);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, e.clientY - 60 - document.getElementById('whiteboard').offsetTop + penSize * 5);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, e.clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
+            ctx2.moveTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft + penSize * 5, e.clientY - canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft + penSize * 5, e.clientY - canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop - penSize * 7);
             ctx2.stroke();
             // ctx2.clearRect(e.clientX-98 - canvasLeft - penSize * 6, e.clientY-60 - canvasTop - penSize * 6, penSize * 12, penSize * 12);
-            ctx1.clearRect(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 5, e.clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 5, penSize * 10, penSize * 10);
+            ctx1.clearRect(e.clientX - canvasOffsetLeft - penSize * 5, e.clientY - canvasOffsetTop - penSize * 5, penSize * 10, penSize * 10);
         }
 
-        socket.emit('message', downX/canvasWidth, downY/canvasHeight, (e.clientX - 98 - document.getElementById('whiteboard').offsetLeft)/canvasWidth, (e.clientY - 60 - document.getElementById('whiteboard').offsetTop)/canvasHeight, penType, penColer, penSize, lastTime);
-        // socket.emit('message', downX, downY, e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, lastTime);
-        // console.log('发送：', downX, downY, e.clientX-98 - document.getElementById('whiteboard').offsetLeft, e.clientY-60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize,lastTime);
+        socket.emit('message', downX / canvasWidth, downY / canvasHeight, (e.clientX - canvasOffsetLeft) / canvasWidth, (e.clientY - canvasOffsetTop) / canvasHeight, penType, penColer, penSize, lastTime);
+        // socket.emit('message', downX, downY, e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop, penType, penColer, penSize, lastTime);
+        // console.log('发送：', downX, downY, e.clientX-canvasOffsetLeft, e.clientY-60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize,lastTime);
 
     } else if ((!canDraw) && downOrUp == 'up') {
         if (penType == 'yuan') {
             cleanCtx();
             ctx2.beginPath();
-            ctx2.arc(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop, 10, 0, Math.PI * 2, false);
+            ctx2.arc(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop, 10, 0, Math.PI * 2, false);
             ctx2.stroke();
         } else if (penType == 'rubber') {
             // alert("jfk");
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
-            ctx2.moveTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, e.clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft + penSize * 5, e.clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft + penSize * 5, e.clientY - 60 - document.getElementById('whiteboard').offsetTop + penSize * 5);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, e.clientY - 60 - document.getElementById('whiteboard').offsetTop + penSize * 5);
-            ctx2.lineTo(e.clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, e.clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
+            ctx2.moveTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft + penSize * 5, e.clientY - canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft + penSize * 5, e.clientY - canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop - penSize * 7);
             ctx2.stroke();
         }
     }
@@ -244,8 +235,10 @@ function mouseUp(e) {
     canDraw = false;
     e = e || window.event;
     uptime = new Date().getTime();
-    socket.emit('downorup', 'up', downX/canvasWidth, downY/canvasHeight, (e.clientX - 98 - document.getElementById('whiteboard').offsetLeft)/canvasWidth, (e.clientY - 60 - document.getElementById('whiteboard').offsetTop)/canvasHeight, penType, penColer, penSize, uptime, CanvasMess);
-    // socket.emit('downorup', 'up', downX, downY, e.clientX - 98 - document.getElementById('whiteboard').offsetLeft, e.clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, uptime, CanvasMess);
+
+    socket.emit('downorup', 'up', downX / canvasWidth, downY / canvasHeight, (e.clientX - canvasOffsetLeft) / canvasWidth, (e.clientY - canvasOffsetTop) / canvasHeight, penType, penColer, penSize, uptime, CanvasMess);
+
+    // socket.emit('downorup', 'up', downX, downY, e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop, penType, penColer, penSize, uptime, CanvasMess);
     if (penType != 'rubber') {
         var image = new Image();
         image.src = canvas2.toDataURL();
@@ -265,10 +258,10 @@ function mouseOut(e) {
 (function receive() {
     socket.on('message', function (downx, downy, penx, peny, pentype, pencolor, pensize) {
         console.log(downx, downy, penx, peny, pentype, pencolor, pensize)
-        downx=downx*canvasWidth;
-        downy=downy*canvasHeight;
-        penx=penx*canvasWidth;
-        peny=peny*canvasHeight;
+        downx = downx * canvasWidth;
+        downy = downy * canvasHeight;
+        penx = penx * canvasWidth;
+        peny = peny * canvasHeight;
         console.info(downx, downy, penx, peny, pentype, pencolor, pensize)
 
         // console.log("收到：", pentype, penx, peny, pencolor, pensize);
@@ -345,10 +338,10 @@ function mouseOut(e) {
     });
 
     socket.on('downorup', function (downorup, downx, downy, penx, peny, pentype, pencolor, pensize, mousetime, canvasmess) {
-        downx=downx*canvasWidth;
-        downy=downy*canvasHeight;
-        penx=penx*canvasWidth;
-        peny=peny*canvasHeight;
+        downx = downx * canvasWidth;
+        downy = downy * canvasHeight;
+        penx = penx * canvasWidth;
+        peny = peny * canvasHeight;
         if (downorup == 'down') {
             ctx2.beginPath();
             downOrUp = 'down';
@@ -400,8 +393,8 @@ function handleStart(e) {
     // ctx2.fillRect(touches[0].pageX,touches[0].pageY,5,5);
 
     canDraw = true;
-    downX = touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft;
-    downY = touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop;
+    downX = touches[0].clientX - canvasOffsetLeft;
+    downY = touches[0].clientY -canvasOffsetTop;
     ctx2.strokeStyle = penColer;
     ctx1.strokeStyle = penColer;
     ctx2.lineWidth = penSize;
@@ -411,8 +404,8 @@ function handleStart(e) {
     }
 
     starTime = new Date().getTime();
-    socket.emit('downorup', 'down', downX, downY, touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, starTime);
-    console.log("star:", 'down', downX, downY, touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, starTime);
+    socket.emit('downorup', 'down', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, starTime);
+    console.log("star:", 'down', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, starTime);
     if (penType == 'text') {
         ctx2.fillStyle = penColer;
         ctx2.font = parseInt(penSize) * 10 + "px" + " Georgia";
@@ -422,7 +415,7 @@ function handleStart(e) {
         // alert(CanvasMess)
     } else {
         CanvasMess = "";
-        ctx2.moveTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
+        ctx2.moveTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
     }
 
 }
@@ -433,8 +426,8 @@ function handleEnd(e) {
     var touches = e.changedTouches;
     canDraw = false;
     uptime = new Date().getTime();
-    socket.emit('downorup', 'up', downX, downY, touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, uptime, CanvasMess);
-    console.log("End:", 'up', downX, downY, touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, uptime, CanvasMess);
+    socket.emit('downorup', 'up', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, uptime, CanvasMess);
+    console.log("End:", 'up', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, uptime, CanvasMess);
     if (penType != 'rubber') {
         var image = new Image();
         image.src = canvas2.toDataURL();
@@ -466,7 +459,7 @@ function handleMove(e) {
     e.preventDefault();
     var touches = e.changedTouches;
     //  ctx2.lineTo(touches[0].pageX,touches[0].pageY);
-    // ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
+    // ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
     // ctx2.stroke();
 
 
@@ -475,41 +468,41 @@ function handleMove(e) {
         lastTime = new Date().getTime();
 
         if (penType == "pencil") {
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
             ctx2.stroke();
         }
         else if (penType == 'line') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
             ctx2.stroke();
             ctx2.closePath();
         }
         else if (penType == 'sanjian') {
             ctx2.beginPath();
             cleanCtx();
-            ctx2.moveTo(downX, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
-            ctx2.lineTo((downX + touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft) / 2, downY);
-            ctx2.lineTo(downX, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            ctx2.moveTo(downX, touches[0].clientY -canvasOffsetTop);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
+            ctx2.lineTo((downX + touches[0].clientX - canvasOffsetLeft) / 2, downY);
+            ctx2.lineTo(downX, touches[0].clientY -canvasOffsetTop);
             ctx2.stroke();
         } else if (penType == 'jvxing') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, downY);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
-            ctx2.lineTo(downX, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, downY);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop);
+            ctx2.lineTo(downX, touches[0].clientY -canvasOffsetTop);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'fang') {
             ctx2.beginPath();
             cleanCtx();
             ctx2.moveTo(downX, downY);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, downY);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, downY + touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - downX);
-            ctx2.lineTo(downX, downY + touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - downX);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, downY);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft, downY + touches[0].clientX - canvasOffsetLeft - downX);
+            ctx2.lineTo(downX, downY + touches[0].clientX - canvasOffsetLeft - downX);
             ctx2.lineTo(downX, downY);
             ctx2.stroke();
         } else if (penType == 'yuan') {
@@ -522,35 +515,35 @@ function handleMove(e) {
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
-            ctx2.moveTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft + penSize * 5, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft + penSize * 5, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop + penSize * 5);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop + penSize * 5);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
+            ctx2.moveTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY -canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY -canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop - penSize * 7);
             ctx2.stroke();
             // ctx2.clearRect(e.clientX-98 - canvasLeft - penSize * 6, e.clientY-60 - canvasTop - penSize * 6, penSize * 12, penSize * 12);
-            ctx1.clearRect(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 5, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 5, penSize * 10, penSize * 10);
+            ctx1.clearRect(touches[0].clientX - canvasOffsetLeft - penSize * 5, touches[0].clientY -canvasOffsetTop - penSize * 5, penSize * 10, penSize * 10);
         }
 
-        socket.emit('message', downX, downY, touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, lastTime);
-        console.log('发送：', downX, downY, touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize, lastTime);
+        socket.emit('message', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, lastTime);
+        console.log('发送：', downX, downY, touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, penType, penColer, penSize, lastTime);
 
     } else if ((!canDraw) && downOrUp == 'up') {
         if (penType == 'yuan') {
             cleanCtx();
             ctx2.beginPath();
-            ctx2.arc(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop, 10, 0, Math.PI * 2, false);
+            ctx2.arc(touches[0].clientX - canvasOffsetLeft, touches[0].clientY -canvasOffsetTop, 10, 0, Math.PI * 2, false);
             ctx2.stroke();
         } else if (penType == 'rubber') {
             // alert("jfk");
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
-            ctx2.moveTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft + penSize * 5, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft + penSize * 5, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop + penSize * 5);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop + penSize * 5);
-            ctx2.lineTo(touches[0].clientX - 98 - document.getElementById('whiteboard').offsetLeft - penSize * 6, touches[0].clientY - 60 - document.getElementById('whiteboard').offsetTop - penSize * 7);
+            ctx2.moveTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY -canvasOffsetTop - penSize * 7);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft + penSize * 5, touches[0].clientY -canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop + penSize * 5);
+            ctx2.lineTo(touches[0].clientX - canvasOffsetLeft - penSize * 6, touches[0].clientY -canvasOffsetTop - penSize * 7);
             ctx2.stroke();
         }
     }

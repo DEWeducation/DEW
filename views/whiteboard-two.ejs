@@ -15,9 +15,9 @@
     <div id="world">
         <div id="whiteboard">
             <div id="canvasdiv">
-                <canvas id="canvas0"></canvas>
-                <canvas id="canvas1"></canvas>
-                <canvas id="canvas2"></canvas>
+                <!--<canvas id="canvas0"></canvas>
+                <canvas id="canvas1"></canvas>-->
+                <!--<canvas id="canvas2"></canvas>-->
             </div>
         </div>
         <div id="tools-pannel">
@@ -27,32 +27,37 @@
             <div id="paintbrush"></div>
             <div id="color"></div>
             <div id="rubber"></div>
-            <div id="shape"></div>
+            <div id="shape">
+                <div id="sanjian"></div>
+                <div id="zhijiaosanjiao"></div>
+                <div id="fang"></div>
+                <div id="jvxing"></div>
+                <div id="yuan"></div>
+            </div>
             <div id="word"></div>
-            <div id="trash"></div>
+            <div id="clearAll"></div>
+            <input id="canvasInput" type="text" autofocus="autofocus">
         </div>
         <a onclick="fullScreen()">
             <div id="maximize-icon"></div>
         </a>
-        <div id="video-icon">
-
-        </div>
+        <div id="video-icon"></div>
     </div>
 </body>
 <script>
     var docment = document.documentElement;
     var maximize = document.getElementById('maximize-icon');
-
+    var canvasDiv = document.getElementById('canvasDiv');
     $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function () {
         var isFullScreen = document.fullScreen ||
             document.mozFullScreen ||
             document.webkitIsFullScreen;
         if (isFullScreen) {
             $(maximize).on('click', exitFullScreen)
-            maximize.style.backgroundImage = "url(../img/whiteboard-tools/trash.png)"
+            maximize.style.backgroundImage = "url(../img/whiteboard-tools/min.svg)"
         } else {
             $(maximize).on('click', fullScreen)
-            maximize.style.backgroundImage = "url(../img/whiteboard-tools/maximize.png)"
+            maximize.style.backgroundImage = "url(../img/whiteboard-tools/maximize.svg)"
         }
 
     })
@@ -66,6 +71,24 @@
     function exitFullScreen() {
         document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen()
     }
+
+    var canvas2 = document.createElement("canvas");
+    canvas2.setAttribute("width", document.getElementById('canvasdiv').clientWidth);
+    canvas2.setAttribute("height", document.getElementById('canvasdiv').clientHeight);
+    canvas2.setAttribute("id", "canvas2");
+    canvasdiv.appendChild(canvas2);
+
+    var canvas1 = document.createElement("canvas");
+    canvas1.setAttribute("width", document.getElementById('canvasdiv').clientWidth);
+    canvas1.setAttribute("height", document.getElementById('canvasdiv').clientHeight);
+    canvas1.setAttribute("id", "canvas1");
+    canvasdiv.appendChild(canvas1);
+
+    var canvas0 = document.createElement("canvas");
+    canvas0.setAttribute("width", document.getElementById('canvasdiv').clientWidth);
+    canvas0.setAttribute("height", document.getElementById('canvasdiv').clientHeight);
+    canvas0.setAttribute("id", "canvas0");
+    canvasdiv.appendChild(canvas0);
 
 </script>
 <script src="../js/leaflet.js"></script>

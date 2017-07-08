@@ -11,15 +11,15 @@ $("#openPad").click(function () {
     // $("#openPad").hide(500)
 });
 
-$("#tuxing").bind('mouseover', function () {
-    $("#tuxing div").css({
+$("#shape").bind('mouseover', function () {
+    $("#shape div").css({
         display: "block"
     });
     // alert("j")
 
 });
-$("#tuxing").bind('mouseout', function () {
-    $("#tuxing div").css({
+$("#shape").bind('mouseout', function () {
+    $("#shape div").css({
         display: "none"
     });
     // alert("j")
