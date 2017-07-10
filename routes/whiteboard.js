@@ -92,6 +92,9 @@ module.exports = function (io) {
             socket.broadcast.emit('shortAudio', data);
         });
 
+        socket.on('fullScreen',function(data){
+            console.log(data)
+        })
         //重新绘制
         socket.on('redraw', function (re) {
             console.log("someone ask history");
