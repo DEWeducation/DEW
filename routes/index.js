@@ -8,6 +8,7 @@ module.exports = function (app) {
     app.get('/welcome', function (req, res, next) {
         res.render('welcome', { title: 'Express' });
     });
+
     app.get('/orderList', function (req, res, next) {
         res.render('orderList')
     })
@@ -17,5 +18,8 @@ module.exports = function (app) {
     })
     app.get('/whiteboard2', function (req, res, next) {
         res.render('whiteboard-two')
+    })
+    app.get('/myvideo', function (req, res, next) {
+        res.render('myvideo')
     })
 };

@@ -2,6 +2,7 @@
 
 var docment = document.documentElement;
 var maximize = document.getElementById('maximize-icon');
+var video = document.getElementById('video-icon');
 var canvasDiv = document.getElementById('canvasDiv');
 
 $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function () {
@@ -12,11 +13,14 @@ $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFu
 
         $(maximize).on('click', exitFullScreen)
         maximize.style.backgroundImage = "url(../img/whiteboard-tools/min.svg)"
+        video.style.backgroundImage = "url(../img/whiteboard-tools/video.svg)"
         socket.emit('fullScreen',"fullScreen")  //开启全屏，发送消息给服务端    
     } else {
         $(maximize).on('click', fullScreen)
         maximize.style.backgroundImage = "url(../img/whiteboard-tools/maximize.svg)"
+         video.style.backgroundImage = null;
         socket.emit('fullScreen',"exitFullScreen")    //退出全屏，发送消息给服务端    
+
     }
 })
 

@@ -16,6 +16,8 @@ module.exports = function (io) {
             //将数据写入到数据库中
             var draw = new Draw({
                 // id: ++MYID, //增加指定增加的id
+                userId: 123,
+                courseId: 333,
                 downOrUp: downorup,
                 downX: downx,
                 downY: downy,
@@ -42,6 +44,8 @@ module.exports = function (io) {
             //将数据写入到数据库中
             var draw = new Draw({
                 // id: ++MYID, //增加指定增加的id
+                userId: 123,
+                courseId: 333,
                 downOrUp: "free",
                 downX: downx,
                 downY: downy,
@@ -55,7 +59,6 @@ module.exports = function (io) {
 
             draw.save(function (err, draw) {
                 if (err) return console.log(err);
-                // console.dir(draw);
             });
 
         });
@@ -92,27 +95,22 @@ module.exports = function (io) {
             socket.broadcast.emit('shortAudio', data);
         });
 
-        socket.on('fullScreen',function(data){
+        socket.on('fullScreen', function (data) {
             console.log(data)
         })
         //重新绘制
         socket.on('redraw', function (re) {
-            console.log("someone ask history");
+            console.log(re + "someone ask history");
 
             Draw.find({}, function (err, chunk) {
                 if (err) {
                     console.error(err);
                     return
                 }
-                console.log("123");
-                // chunk.sort({"mousetime": 1});
-                //console.log(chunk.toString());
                 var data;
-                console.log("开始都数据库");
+                console.log("开始读数据库");
                 for (var i = 0; i < chunk.length; i++) {
-                    //console.dir(dat);
                     data = chunk[i];
-                    // console.log(data.canvaseMess);
                     socket.emit('redraw', data);
                 }
                 socket.emit('redraw', "end");
@@ -120,7 +118,41 @@ module.exports = function (io) {
             });
 
         });
-
+        //请求视频列表
+        socket.on('requestMyVideoList', function (getData) {
+            console.log(getData);
+            Draw.distinct('courseId', { "userId": 123 }, function (err, chunk) {
+                if (err) {
+                    console.error(err);
+                    return
+                }
+                console.log('用户' + getData.userId + '请求requestMyVideoList')
+                var data;
+                for (var i = 0; i < chunk.length; i++) {
+                    data = chunk[i];
+                    socket.emit('responseMyVideoList', data)
+                }
+                socket.emit('responseMyVideoList', "end")
+            })
+        })
+        //请求视频
+        socket.on('requestVideo', function (getData) {
+            console.log(getData);
+            Draw.find({userId:getData.userId,courseId:getData.courseId}, function (err, chunk) {
+                if (err) {
+                    console.error(err);
+                    return
+                }
+                console.log('用户' + getData.userId + '请求requestVideo')
+                var data;
+                for (var i = 0; i < chunk.length; i++) {
+                    data = chunk[i];
+                    socket.emit('responseVideo', data)
+                 
+                }
+                socket.emit('responseVideo', "end")
+            })
+        })
         //重新播放
         socket.on('reAudio', function (yes) {
             console.log(yes);
