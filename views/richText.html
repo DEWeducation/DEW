@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor-daerwen</title>
+    <style type="text/css">
+        #container {
+            width: 800px;
+            margin: 0 auto;
+        }
+        #toolbar-container {
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        #toolbar-container:after {
+            display: table;
+            content: '';
+            clear: both;
+        }
+        #editor-toolbar {
+            float: left;
+        }
+        #btn-container {
+            float: right;
+            text-align: right;
+        }
+        #editor-text {
+            border: 1px solid #ccc;
+            border-top: 0;
+            height: 300px;
+            background-color: #fff;
+            z-index: 1;
+        }
+        #cover {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            /*background-color: #f1f1f1;*/
+            background-color:#000;
+            filter:alpha(opacity=60); /*IE*/
+            -moz-opacity:0.6; /*old Mozilla*/
+            -khtml-opacity: 0.6; /*old Safari*/
+            opacity: 0.6; /*Chrome, Opera, Safari*/
+        }
+        #btn_fullscreen{
+            background-color: #fff;
+            border: 0px;
+            height: 100%;
+            position:relative;
+            top:3px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+<!--非全屏模式-->
+
+<div id="container">
+    <!--菜单栏-->
+    <div id="toolbar-container">
+        <div id="editor-toolbar"></div>
+        <div id="btn-container">
+            <button id="btn_fullscreen"><span class="">预览</span></button>
+        </div>
+    </div>
+    <!--编辑区域-->
+    <div id="editor-text" contenteditable="false">
+
+    </div>
+</div>
+<!--全屏模式-->
+<div id="cover"></div>
+<script type="text/javascript" src="../public/js/wangEditor.min.js"></script>
+<script href="../public/js/jquery.js"></script>
+<script type="text/javascript">
+    // 创建编辑器
+    var E = window.wangEditor
+    var editor2 = new E('#editor-toolbar', '#editor-text')
+    editor2.create()
+
+    // 获取使用到的元素
+    var toolbarContaner = document.getElementById('toolbar-container')
+    var editorText = document.getElementById('editor-text')
+    var cover = document.getElementById('cover')
+    var container = document.getElementById('container')
+
+    // 全屏事件
+    function doFullScreen() {
+        document.getElementById("toolbar-container").style.border="0px";//隐藏
+        document.getElementById("editor-toolbar").style.display="none";//隐藏
+
+        cover.style.display = 'block';
+        editorText.style.height = '100%';
+        editorText.style.width = '100%';
+        cover.appendChild(toolbarContaner)
+        cover.appendChild(editorText)
+        document.getElementById('editor-text').childNodes[1].contentEditable=false;
+    }
+
+    // 退出全屏事件
+    function unDoFullScreen() {
+        document.getElementById("toolbar-container").style.border=" 1px solid #ccc";//显示
+        document.getElementById("editor-toolbar").style.display="";//显
+        container.appendChild(toolbarContaner)
+        container.appendChild(editorText)
+        editorText.style.height = '300px';
+        cover.style.display = 'none'
+        document.getElementById('editor-text').childNodes[1].contentEditable=true;
+    }
+
+    // 是否是全屏的标志
+    var isFullScreen = false
+
+    // 点击事件
+    var btn_fullscreen = document.getElementById('btn_fullscreen')
+    btn_fullscreen.addEventListener('click', function () {
+        if (isFullScreen) {
+            isFullScreen = false
+            unDoFullScreen()
+        } else {
+            isFullScreen = true
+            doFullScreen()
+        }
+    }, false)
+</script>
+</body>
+</html>
