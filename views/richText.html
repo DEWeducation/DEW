@@ -81,8 +81,9 @@
 <script type="text/javascript">
     // 创建编辑器
     var E = window.wangEditor
-    var editor2 = new E('#editor-toolbar', '#editor-text')
-    editor2.create()
+    var editor = new E('#editor-toolbar', '#editor-text')
+    editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+    editor.create()
 
     // 获取使用到的元素
     var toolbarContaner = document.getElementById('toolbar-container')
