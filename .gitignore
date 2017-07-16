@@ -3,3 +3,4 @@
 .vscode/
 .idea/
 DEW.iml
+node_modules
