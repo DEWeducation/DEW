@@ -96,7 +96,7 @@ $('#canvas2').css("z-index", 2);
         if (data == "end") {
             canReDraw = true;
             // alert("接收完毕")
-            console.log(drawHistory);
+            // console.log(drawHistory);
             console.info(num);
             console.log(data);
             num = 0;
@@ -148,6 +148,7 @@ function requestVideo(_courseId) {
         courseId: _courseId
     }
     socket.emit('requestVideo', sendDate)
+    socket.emit('reAudio',"yes");
 }
 function reDraw() {
     socket.emit('redraw', 're' + '123' + '333');//三个参数，标志、用户号、课程号
@@ -193,7 +194,7 @@ function drawAgian(downorup, downx, downy, penx, peny, pentype, pencolor, pensiz
         ctx2.lineWidth = pensize;
         ctx1.lineWidth = pensize;
         if (pentype == 'pencil') {
-            console.log("this is pencil")
+            // console.log("this is pencil")
             ctx2.lineTo(penx, peny);
             ctx2.stroke();
         } else if (pentype == 'line') {

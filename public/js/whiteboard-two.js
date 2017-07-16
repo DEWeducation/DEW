@@ -29,9 +29,11 @@ function fullScreen() {
         docment.mozRequestFullScreen ? docment.mozRequestFullScreen() :
             docment.webkitRequestFullscreen ? docment.webkitRequestFullscreen() :
                 docment.msRequestFullscreen && docment.msRequestFullscreen();
+                // openAudio()
 }
 function exitFullScreen() {
-    document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen()
+    document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen();
+    // closeAudio()
 }
 
 //Insert canvas elements

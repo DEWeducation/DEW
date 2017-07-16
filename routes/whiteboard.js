@@ -138,7 +138,7 @@ module.exports = function (io) {
         //请求视频
         socket.on('requestVideo', function (getData) {
             console.log(getData);
-            Draw.find({userId:getData.userId,courseId:getData.courseId}, function (err, chunk) {
+            Draw.find({ userId: getData.userId, courseId: getData.courseId }, function (err, chunk) {
                 if (err) {
                     console.error(err);
                     return
@@ -148,7 +148,7 @@ module.exports = function (io) {
                 for (var i = 0; i < chunk.length; i++) {
                     data = chunk[i];
                     socket.emit('responseVideo', data)
-                 
+
                 }
                 socket.emit('responseVideo', "end")
             })
@@ -159,14 +159,15 @@ module.exports = function (io) {
 
             Audio.find({}, function (err, audios) {
                 if (err) {
-                    console.erro("audio find erro");
+                    console.error("audio find erro");
                 }
                 // audios.sort({"id": 1});
+                console.log(audios.length)
                 for (var i = 0; i < audios.length; i++) {
                     var data = audios[i].data;
-                    console.log(i);
-                    socket.emit('reAudio', data);
 
+                    socket.emit('reAudio', data);
+                    // console.log(data)
                 }
                 socket.emit('reAudio', 'end');
                 console.log("结束了")
