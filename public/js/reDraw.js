@@ -282,8 +282,8 @@ $("#recover").mouseout(function () {
 function getFaster() {
 
     faster = $("#jindutiao").val();
-    // console.log(faster)
-    return faster;
+    console.log(faster)
+    return 1;
 
 }
 function cleanCtx(type) {
