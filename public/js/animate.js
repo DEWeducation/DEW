@@ -11,15 +11,15 @@ $("#openPad").click(function () {
     // $("#openPad").hide(500)
 });
 
-$("#tuxing").bind('mouseover', function () {
-    $("#tuxing div").css({
+$("#shape").bind('mouseover', function () {
+    $("#shape div").css({
         display: "block"
     });
     // alert("j")
 
 });
-$("#tuxing").bind('mouseout', function () {
-    $("#tuxing div").css({
+$("#shape").bind('mouseout', function () {
+    $("#shape div").css({
         display: "none"
     });
     // alert("j")
@@ -59,14 +59,25 @@ $("#sizebar").bind('mouseout', function () {
     });
 });
 
+$("#color").hover(function () {
+    $(".colpick_hue").css("display", "block")
+    // $(".colpick_hex_field").css("display","block")
+},
+    function () {
+        setTimeout ( function () {
+            $(".colpick_hue").css("display", "none")
+        },2000)
+        //  $(".colpick_hex_field").css("display","none")
+    })
+
 $("#maxPad").bind('click', function (e) {
     if (padMax % 2 == 1) {//变小
         $("#audioPhone,#closePad").animate({
-            left:400
-        },200);
+            left: 400
+        }, 200);
         $("#up,#down").animate({
-            left:840
-        },100);
+            left: 840
+        }, 100);
         $("#pad").css({
             width: 830,
             height: 600,
@@ -80,23 +91,23 @@ $("#maxPad").bind('click', function (e) {
         canvasHeight = 600;
     } else if (padMax % 2 == 0) {//变大
         $("#audioPhone,#closePad").animate({
-            left:3/5*(document.body.scrollHeight -120)
+            left: 3 / 5 * (document.body.scrollHeight - 120)
         });
         $("#up,#down").animate({
-            left:4/3*(document.body.scrollHeight-120)+10
+            left: 4 / 3 * (document.body.scrollHeight - 120) + 10
         });
         $("#pad").css({
             height: document.body.scrollHeight - 120,
-            width:4/3*(document.body.scrollHeight -120) ,
+            width: 4 / 3 * (document.body.scrollHeight - 120),
             // width: document.body.scrollWidth - 500,
             top: 0
         });
         $("canvas").attr({
             height: document.body.scrollHeight - 120,
-            width: 4/3*(document.body.scrollHeight-120)-40,
+            width: 4 / 3 * (document.body.scrollHeight - 120) - 40,
             // width: document.body.scrollWidth - 540,
         });
-        canvasWidth = 4/3*(document.body.scrollHeight- 120)-40;
+        canvasWidth = 4 / 3 * (document.body.scrollHeight - 120) - 40;
         canvasHeight = document.body.scrollHeight - 120;
         // canvasHeight = document.body.scrollHeight - 120;
     }

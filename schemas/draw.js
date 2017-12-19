@@ -4,7 +4,8 @@
 var mongoose = require('mongoose')
 
 var DrawSchema = new mongoose.Schema({
-    id: Number, //增加指定增加的id
+    userId: Number, //用户id
+    courseId:Number,//课程id
     downOrUp: String,
     downX: Number,
     downY: Number,

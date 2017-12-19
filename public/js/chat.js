@@ -25,12 +25,11 @@ document.onkeydown = function keyDown(e) {
 
 
 //语音聊天长连开关
-$("#audioPhone").click(function () {
+$("#maximize-icon").click(function () {
     offOrOn = true;
     if (openAudioPhone % 2 == 1) {
         $("#audioPhone").removeClass("audioPhoneO").addClass("audioPhoneT");
         openAudio();
-
     }
     if (openAudioPhone % 2 == 0) {
         offOrOn = false;
@@ -372,6 +371,7 @@ SRecorder.get = function (callback) {
 
 
     socket.on('reAudio', function (data) {
+        // console.log("开始接收音频")
         Atime += 2;
         if (data != 'end') {
             var blob = new Blob([data], {type: 'audio/wav'});

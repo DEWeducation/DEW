@@ -1,0 +1,168 @@
+
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 1000px;
+    user-select: none;
+}
+
+#world{
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+}
+#whiteboard{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000;
+    width: 95%;
+    height: 95%;
+    background-color: #fff;
+}
+
+#tools-pannel{
+    position: absolute;
+    top: 92%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /*background-color: #fa2;*/
+    width: 548px;
+    height: 60px;
+}
+#tools-pannel>div{
+    margin: 0 -3px;
+    /*background-color: #4c9;*/
+    height: 60px;
+    width: 60px;
+    /*border: 1px solid #fff;*/
+    display: inline-block;
+}
+#maximize-icon{
+    z-index: 5;
+   position: absolute;
+   right: 3%;
+   top: 3%;
+    height: 60px;
+    width: 60px;
+    background-image: url(../img/whiteboard-tools/maximize.svg);
+    background-size: cover;
+}
+#video-icon{
+    z-index: 5;
+   position: absolute;
+   left: 3%;
+   top: 3%;
+    height: 60px;
+    width: 60px;
+    background-size: cover;
+}
+#rule{
+    background-image: url(../img/whiteboard-tools/rule.svg);
+    background-size: cover;
+}
+#pencil-one{
+   background-image: url(../img/whiteboard-tools/pen1.svg);
+    background-size: cover; 
+}
+#pencil-two{
+    background-image: url(../img/whiteboard-tools/pen2.svg);
+    background-size: cover;
+}
+#paintbrush{
+    background-image: url(../img/whiteboard-tools/pen3.svg);
+    background-size: cover;
+}
+#color{
+ border: 21 solid rgba(1, 1, 1,1);
+}
+.colpick_color{
+    border-radius: 30px ;
+    overflow: hidden;
+}
+
+#rubber{
+    background-image: url(../img/whiteboard-tools/rubber.svg);
+    background-size: cover;
+}
+#shape{
+    background-image: url(../img/whiteboard-tools/shape.svg);
+    background-size: cover;
+}
+#word{
+    background-image: url(../img/whiteboard-tools/word.svg);
+    background-size: cover;
+}
+#clearAll{
+    background-image: url(../img/whiteboard-tools/trash.svg);
+    background-size: cover;
+}
+
+canvas {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%; 
+    width: 100%; 
+    display: block;
+}
+
+#canvas0 {
+    background-color: #F8F8FF;
+    z-index: 0;
+}
+#canvasdiv{
+    width: 100%;
+    height: 100%;
+}
+
+#shape div {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background-color: #CCCCCC;
+    /*border:1px solid black;*/
+    position: relative;
+    left: 40px;
+    top: -100px;
+    z-index: 5;
+}
+
+#sanjian {
+    background: url("../img/sanjianxing.png");
+    background-size: contain;
+    overflow: visible;
+}
+#zhijiaosanjiao {
+    background: url("../img/zhijiao.png");
+    background-size: contain;
+}
+
+#yuan {
+    background: url("../img/Circle_244px_1198167_easyicon.net.png");
+    background-size: contain;
+}
+
+#fang {
+    background: url("../img/Square_343px_1198766_easyicon.net.png");
+    background-size: contain;
+}
+
+#jvxing {
+    background: url("../img/jvxing.png");
+    background-size: contain;
+}
+
+#canvasInput {
+    font-size: 40px;
+    width: 785px;
+    height: 60px;
+    position: absolute;
+    z-index: 2;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
