@@ -25,16 +25,16 @@
         <nav id="mainmenu" class="mainmenu">
             <ul>
                 <li class="logo-wrapper">
-                    <a href="Tindex.html"><img src="../img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a>
+                    <a href="/"><img src="../img/logo.png" alt="达尔文"></a>
                 </li>
                 <li>
-                    <a href="Tindex.html">首页</a>
+                    <a href="/">首页</a>
                 </li>
                 <li>
-                    <a href="Tfeatures.html">学习资讯</a>
+                    <a href="//localhost:3000">学习资讯</a>
                 </li>
                 <li>
-                    <a href="change.html">抢单作答</a>
+                    <a href="#">抢单作答</a>
                 </li>
             </ul>
         </nav>
@@ -56,144 +56,37 @@
         <div class="row">
             <div class="col-md-12">
                 <table class="shopping-cart">
+                    <% for(var i = 0; i < orders.length; i++) { var order = orders[i]; %>
                     <tr>
                         <td class="image">
-                            <a href="page-product-details.html"><img src="../img/product1.jpg" alt="Item Name"></a>
+                            <a href="#"><img src="../img/product1.jpg" alt=""></a>
                         </td>
                         <td>
-                            <div class="cart-item-title">
-                                <a href="page-product-details.html">详细信息</a>
-                            </div>
                             <div class="feature color">
-                                教育阶段: <b>小学教育</b>
+                                教育阶段: <b><%=order.e_stage%></b>
                             </div>
-                            <div class="feature">科目: <b>数学</b></div>
+                            <div class="feature">科目: <b><%=order.sub_class%></b></div>
+                            <details>
+                                <summary>详细信息</summary>
+                                <ul>
+                                    <li>辅导老师类型: <b><%=order.t_type%></b></li>
+                                    <li>对应知识点: <b><%=order.k_Point%></b></li>
+                                    <li>教师要求: <b><%=order.require_teacher%></b></li>
+                                    <li>问题详细描述: <pre><%-order.p_detail%></pre></li>
+                                </ul>
+                            </details>
                         </td>
                         <td class="quantity">
                             <input class="form-control input-sm input-micro" type="text" value="1">
                         </td>
-                        <td class="price">$5</td>
+                        <td class="price"><%=order.bonus%>￥</td>
                         <td class="actions">
-                            <a href="/whiteboard" class="btn btn-xs btn-grey"><i
+                            <a href="/whiteboard2" class="btn btn-xs btn-grey"><i
                                     class="glyphicon glyphicon-pencil"></i></a>
-                            <a href="shoppng.html" class="btn btn-xs btn-grey"><i class="glyphicon glyphicon-trash"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-xs btn-grey"><i class="glyphicon glyphicon-trash"></i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="image">
-                            <a href="page-product-details.html"><img src="../img/product2.jpg" alt="Item Name"></a>
-                        </td>
-                        <td>
-                            <div class="cart-item-title">
-                                <a href="page-product-details.html">详细信息</a>
-                            </div>
-                            <div class="feature color">
-                                教育阶段: <b>小学教育</b>
-                            </div>
-                            <div class="feature">科目: <b>数学</b></div>
-                        </td>
-                        <td class="quantity">
-                            <input class="form-control input-sm input-micro" type="text" value="1">
-                        </td>
-                        <td class="price">$5</td>
-                        <td class="actions">
-                            <a href="/whiteboard" class="btn btn-xs btn-grey"><i
-                                    class="glyphicon glyphicon-pencil"></i></a>
-                            <a href="shoppng.html" class="btn btn-xs btn-grey"><i class="glyphicon glyphicon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="image">
-                            <a href="page-product-details.html"><img src="../img/product2.jpg" alt="Item Name"></a>
-                        </td>
-                        <td>
-                            <div class="cart-item-title">
-                                <a href="page-product-details.html">详细信息</a>
-                            </div>
-                            <div class="feature color">
-                                教育阶段: <b>小学教育</b>
-                            </div>
-                            <div class="feature">科目: <b>数学</b></div>
-                        </td>
-                        <td class="quantity">
-                            <input class="form-control input-sm input-micro" type="text" value="1">
-                        </td>
-                        <td class="price">$5</td>
-                        <td class="actions">
-                            <a href="whiteboard.ejs" class="btn btn-xs btn-grey"><i
-                                    class="glyphicon glyphicon-pencil"></i></a>
-                            <a href="shoppng.html" class="btn btn-xs btn-grey"><i class="glyphicon glyphicon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="image">
-                            <a href="page-product-details.html"><img src="../img/product2.jpg" alt="Item Name"></a>
-                        </td>
-                        <td>
-                            <div class="cart-item-title">
-                                <a href="page-product-details.html">详细信息</a>
-                            </div>
-                            <div class="feature color">
-                                教育阶段: <b>小学教育</b>
-                            </div>
-                            <div class="feature">科目: <b>数学</b></div>
-                        </td>
-                        <td class="quantity">
-                            <input class="form-control input-sm input-micro" type="text" value="1">
-                        </td>
-                        <td class="price">$5</td>
-                        <td class="actions">
-                            <a href="whiteboard.ejs" class="btn btn-xs btn-grey"><i
-                                    class="glyphicon glyphicon-pencil"></i></a>
-                            <a href="shoppng.html" class="btn btn-xs btn-grey"><i class="glyphicon glyphicon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="image">
-                            <a href="page-product-details.html"><img src="../img/product2.jpg" alt="Item Name"></a>
-                        </td>
-                        <td>
-                            <div class="cart-item-title">
-                                <a href="page-product-details.html">详细信息</a>
-                            </div>
-                            <div class="feature color">
-                                教育阶段: <b>小学教育</b>
-                            </div>
-                            <div class="feature">科目: <b>数学</b></div>
-                        </td>
-                        <td class="quantity">
-                            <input class="form-control input-sm input-micro" type="text" value="1">
-                        </td>
-                        <td class="price">$5</td>
-                        <td class="actions">
-                            <a href="whiteboard.ejs" class="btn btn-xs btn-grey"><i
-                                    class="glyphicon glyphicon-pencil"></i></a>
-                            <a href="shoppng.html" class="btn btn-xs btn-grey"><i class="glyphicon glyphicon-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="image">
-                            <a href="page-product-details.html"><img src="../img/product3.jpg" alt="Item Name"></a>
-                        </td>
-                        <td>
-                            <div class="cart-item-title">
-                                <a href="page-product-details.html">详细信息</a>
-                            </div>
-                            <div class="feature color">
-                                教育阶段: <b>小学教育</b>
-                            </div>
-                            <div class="feature">科目: <b>数学</b></div>
-                        </td>
-                        <td class="quantity">
-                            <input class="form-control input-sm input-micro" type="text" value="1">
-                        </td>
-                        <td class="price">$5</td>
-                        <td class="actions">
-                            <a href="whiteboard.ejs" class="btn btn-xs btn-grey"><i
-                                    class="glyphicon glyphicon-pencil"></i></a>
-                            <a href="shoppng.html" class="btn btn-xs btn-grey"><i class="glyphicon glyphicon-trash"></i></a>
-                        </td>
-                    </tr>
+                    <% } %>
                 </table>
             </div>
         </div>

@@ -4,8 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<!--<title>“答尔文”一对一在线辅导</title>-->
-		<title><%= title %></title>
+		<title>“答尔文”一对一在线辅导</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
 
@@ -33,6 +32,86 @@
 			#onlya {
 				color: black;
 			}
+	        #container {
+	            width: 800px;
+	            margin: 0 auto;
+	        }
+	        #toolbar-container {
+	            border: 1px solid #ccc;
+	            background-color: #fff;
+	        }
+	        #toolbar-container:after {
+	            display: table;
+	            content: '';
+	            clear: both;
+	        }
+	        #editor-toolbar {
+	            float: left;
+	        }
+	        #btn-container {
+	            float: right;
+	            text-align: right;
+	        }
+	        #editor-text {
+	            border: 1px solid #ccc;
+	            border-top: 0;
+	            height: 300px;
+	            background-color: #fff;
+	            z-index: 1;
+	        }
+	        #cover {
+	            display: none;
+	            position: fixed;
+	            z-index: 10000;
+	            top: 0px;
+	            left: 0px;
+	            right: 0px;
+	            height: 100%;
+	            width: 100%;
+	            padding: 0px;
+	            /*background-color: #f1f1f1;*/
+	            background-color:#000;
+	            filter:alpha(opacity=100); /*IE*/
+	            -moz-opacity:1; /*old Mozilla*/
+	            -khtml-opacity: 1; /*old Safari*/
+	            opacity: 1; /*Chrome, Opera, Safari*/
+	        }
+	        #btn_fullscreen{
+	            background-color: #fff;
+	            border: 0px;
+	            height: 100%;
+	            position:relative;
+	            top:3px;
+	            z-index: 9999;
+	        }
+	        label {
+	        	color: #fff;
+	        }
+	        .btn_sub {
+	        	display: inline-block;
+			    margin-bottom: 0;
+			    font-weight: normal;
+			    text-align: center;
+			    vertical-align: middle;
+			    cursor: pointer;
+			    background-image: none;
+			    border: 1px solid transparent;
+			    white-space: nowrap;
+	        	margin-top: 20px;
+	        	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    			box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    			color: #fff;
+			    background-color: #009a61;
+			    border-color: #008151;
+			    padding: 10px 16px;
+			    font-size: 18px;
+			    line-height: 1.33;
+			    border-radius: 6px;
+	        }
+	        .btn_sub:hover {
+	        	background-color: #006741;
+    			border-color: #00432a
+	        }
 		</style>
 	</head>
 
@@ -42,16 +121,17 @@
 			<div class="container">
 				<div class="menuextras">
 				</div>
+				<form action="/post_order" method="post" id="form">
 				<nav id="mainmenu" class="mainmenu">
 					<ul>
 						<li class="logo-wrapper">
-							<a href="index1.ejs"><img src="../img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a>
+							<a href="/"><img src="../img/logo.png" alt="达尔文"></a>
 						</li>
 						<li class="active">
-							<a href="index1.ejs">首页</a>
+							<a href="/">首页</a>
 						</li>
 						<li>
-							<a href="features.html">学习资讯</a>
+							<a href="//localhost:3000">学习资讯</a>
 						</li>
 						<li class="has-submenu">
 							<a href="#">在线答疑</a>
@@ -68,141 +148,166 @@
 											</li>
 										</ul>
 										<h4>悬赏金额</h4>
-										<form>
+										<div>
 											<ul>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">5¥</a>
+												<li><input id="bonus1" type="radio" value="5" name="bonus" checked />
+													<label for="bonus1">5¥</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">10¥</a>
+												<li><input id="bonus2" type="radio" value="10" name="bonus" />
+													<label for="bonus2">10¥</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">15¥</a>
+												<li><input id="bonus3" type="radio" value="15" name="bonus" />
+													<label for="bonus3">15¥</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">20¥</a>
+												<li><input id="bonus4" type="radio" value="20" name="bonus" />
+													<label for="bonus4">20¥</label>
 												</li>
 											</ul>
-										</form>
+										</div>
 										<h4>辅导老师类型</h4>
-										<form>
+										<div>
 											<ul>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">资深教师</a>
+												<li><input id="t_type1" type="radio" value="资深教师" name="t_type" checked/>
+													<label for="t_type1">资深教师</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">一般教师</a>
+												<li><input id="t_type2" type="radio" value="一般教师" name="t_type" />
+													<label for="t_type2">一般教师</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">在校大学生</a>
+												<li><input id="t_type3" type="radio" value="在校大学生" name="t_type" />
+													<label for="t_type3">在校大学生</label>
 												</li>
 											</ul>
-										</form>
+										</div>
 									</div>
 									<div>
 										<h4>按教育阶段分类</h4>
-										<form>
+										<div>
 											<ul>
 												<li>
-													<input type="radio" value="None" name="check" checked="checked" />
-													<a href="#">小学教育</a>
+													<input id="e_stage1" type="radio" value="小学教育" name="e_stage" checked="checked" />
+													<label for="e_stage1">小学教育</label>
 												</li>
 												<li>
-													<input type="radio" value="None" name="check" />
-													<a href="#">初中教育</a>
+													<input id="e_stage2" type="radio" value="初中教育" name="e_stage" />
+													<label for="e_stage2">初中教育</label>
 												</li>
 												<li>
-													<input type="radio" value="None" name="check" />
-													<a href="#">高中教育</a>
+													<input id="e_stage3" type="radio" value="高中教育" name="e_stage" />
+													<label for="e_stage3">高中教育</label>
 												</li>
 												<li>
-													<input type="radio" value="None" name="check" />
-													<a href="#">大学教育</a>
+													<input id="e_stage4" type="radio" value="大学教育" name="e_stage" />
+													<label for="e_stage4">大学教育</label>
 												</li>
 											</ul>
-										</form>
+										</div>
 										<h4>对应知识点</h4>
-										<from>
+										<div>
 											<ul>
 												<li>
-													<input type="radio" value="None" name="check" />
-													<a href="#">数和数的运算</a>
+													<input id="k_Point1" type="radio" value="数和数的运算" name="k_Point" checked/>
+													<label for="k_Point1">数和数的运算</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">度量衡</a>
+												<li><input id="k_Point2" type="radio" value="度量衡" name="k_Point" />
+													<label for="k_Point2">度量衡</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">代数初步知识</a>
+												<li><input id="k_Point3" type="radio" value="代数初步知识" name="k_Point" />
+													<label for="k_Point3">代数初步知识</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">几何的初步知识</a>
+												<li><input id="k_Point4" type="radio" value="几何的初步知识" name="k_Point" />
+													<label for="k_Point4">几何的初步知识</label>
 												</li>
-												<li><input type="radio" value="None" name="check" />
-													<a href="#">简单的统计</a>
+												<li><input id="k_Point5" type="radio" value="简单的统计" name="k_Point" />
+													<label for="k_Point5">简单的统计</label>
 												</li>
 												</ul>
-										</from>
+										</div>
 									</div>
 									<div>
 										<h4>按科目分类</h4>
-										<from>
+										<div>
 											<ul>
-												<li><input type="radio" value="None" name="check1" checked="checked" />
-													<a href="#">数学</a>
+												<li><input id="sub_class1" type="radio" value="数学" name="sub_class" checked="checked" />
+													<label for="sub_class1">数学</label>
 												</li>
-												<li><input type="radio" value="None" name="check1" />
-													<a href="#">语文</a>
+												<li><input id="sub_class2" type="radio" value="语文" name="sub_class" />
+													<label for="sub_class2">语文</label>
 												</li>
-												<li><input type="radio" value="None" name="check1" />
-													<a href="#">英语</a>
+												<li><input id="sub_class3" type="radio" value="英语" name="sub_class" />
+													<label for="sub_class3">英语</label>
 												</li>
-												<li><input type="radio" value="None" name="check1" />
-													<a href="#">物理</a>
+												<li><input id="sub_class4" type="radio" value="物理" name="sub_class" />
+													<label for="sub_class4">物理</label>
 												</li>
-												<li><input type="radio" value="None" name="check1" />
-													<a href="#">化学</a>
+												<li><input id="sub_class5" type="radio" value="化学" name="sub_class" />
+													<label for="sub_class5">化学</label>
 												</li>
 											</ul>
-										</from>
+										</div>
 										<h4>教师要求</h4>
-										<from>
+										<div>
 											<ul>
-												<li><input type="checkbox" value="None" name="check" />
-													<a href="#">Blog Posts (List)</a>
+												<li><input id="require_teacher1" type="checkbox" value="长的漂亮" name="require_teacher" />
+													<label for="require_teacher1">长的漂亮</label>
 												</li>
-												<li><input type="checkbox" value="None" name="check" />
-													<a href="#">Blog Single Post (Right Sidebar)</a>
+												<li><input id="require_teacher2" type="checkbox" value="声音好听" name="require_teacher" />
+													<label for="require_teacher2">声音好听</label>
 												</li>
-												<li><input type="checkbox" value="None" name="check" />
-													<a href="#">Blog Single Post (Left Sidebar)</a>
+												<li><input id="require_teacher3" type="checkbox" value="讲题细心" name="require_teacher" />
+													<label for="require_teacher3">讲题细心</label>
 												</li>
-												<li><input type="checkbox" value="None" name="check" />
-													<a href="#">Latest & Featured News</a>
-												</li>
-												<li>
-													<p>
-														<h5>对教师的其他要求</h5></p>
+												<li><input id="require_teacher4" type="checkbox" value="学历高" name="require_teacher" />
+													<label for="require_teacher4">学历高</label>
 												</li>
 												<li>
-													<textarea id="txtCon" name="message"></textarea>
+													<p>对教师的其他要求</p>
 												</li>
-												<a id="onlya" href="/orderList"><input type="button" value="提交"></a>
+												<li>
+													<textarea id="txtCon" name="require_teacher_else"></textarea>
+												</li>
 											</ul>
-										</from>
+										</div>
 									</div>
 								</div>
+								<div style="width: 100%;margin-top: 20px;text-align: center;">
+									<h4 style="text-align: center;">问题详细描述</h4>
+									<div id="container">
+									    <!--菜单栏-->
+									    <div id="toolbar-container">
+									        <div id="editor-toolbar"></div>
+									        <div id="btn-container">
+									            <button id="btn_fullscreen"><span class="">预览</span></button>
+									        </div>
+									    </div>
+									    <!--编辑区域-->
+									    <div id="editor-text" contenteditable="false">
+
+									    </div>
+									</div>
+									<input type="text" name="p_detail" style="display: none;" id="p_detail">
+									<button class="btn_sub" id="post_submit">提交</button>
+								</div>
 							</div>
-							<li>
-								<a href="people.html">个人中心（我的储物箱）</a>
-							</li>
-							</ul>
+						<li>
+							<a href="people.html">个人中心（我的储物箱）</a>
+						</li>
+					</ul>
 				</nav>
-				<div id="login">
-				
-				</div>
+			</form>
+			<div id="login">
+				<% if (user) { %>
+					<a href="#"><%= user.nickname  %></a>
+					<a id="out">退出</a>
+				<% } else { %>
+					<a href="//localhost:3000/signin">登录</a> | 
+					<a href="//localhost:3000/signup">注册</a>
+				<% } %>
+			</div>
 			</div>
 		</div>
-
+		<!--全屏模式-->
+		<div id="cover"></div>
+		<!-- end 全屏 -->
 		<div class="homepage-slider">
 			<div id="sequence">
 				<ul class="sequence-canvas">
@@ -354,11 +459,73 @@
 	<script src="../js/jquery.bxslider.js"></script>
 	<script src="../js/main-menu.js"></script>
 	<script src="../js/template.js"></script>
-<script>
-	$("#out").on("click",function () {
-		if($("#out").html()=="退出"){
-			$("#out").attr("href","/logout")
-		}
-	})
-</script>
+	<script>
+		$("#out").on("click",function () {
+			if($("#out").html()=="退出"){
+				$("#out").attr("href","/logout")
+			}
+		})
+		
+	</script>
+	<script type="text/javascript" src="../js/wangEditor.min.js"></script>
+	<script type="text/javascript">
+	    // 创建编辑器
+	    var E = window.wangEditor
+	    var editor = new E('#editor-toolbar', '#editor-text')
+	    editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+	    editor.create()
+
+	    // 获取使用到的元素
+	    var toolbarContaner = document.getElementById('toolbar-container')
+	    var editorText = document.getElementById('editor-text')
+	    var cover = document.getElementById('cover')
+	    var container = document.getElementById('container')
+
+	    // 全屏事件
+	    function doFullScreen() {
+	        document.getElementById("toolbar-container").style.border="0px";//隐藏
+	        document.getElementById("editor-toolbar").style.display="none";//隐藏
+
+	        cover.style.display = 'block';
+	        editorText.style.height = '100%';
+	        editorText.style.width = '100%';
+	        cover.appendChild(toolbarContaner)
+	        cover.appendChild(editorText)
+	        document.getElementById('editor-text').childNodes[1].contentEditable=false;
+	    }
+
+	    // 退出全屏事件
+	    function unDoFullScreen() {
+	        document.getElementById("toolbar-container").style.border=" 1px solid #ccc";//显示
+	        document.getElementById("editor-toolbar").style.display="";//显
+	        container.appendChild(toolbarContaner)
+	        container.appendChild(editorText)
+	        editorText.style.height = '300px';
+	        cover.style.display = 'none'
+	        document.getElementById('editor-text').childNodes[1].contentEditable=true;
+	    }
+
+	    // 是否是全屏的标志
+	    var isFullScreen = false
+
+	    // 点击事件
+	    var btn_fullscreen = document.getElementById('btn_fullscreen')
+	    btn_fullscreen.addEventListener('click', function () {
+	        if (isFullScreen) {
+	            isFullScreen = false
+	            unDoFullScreen()
+	            setTimeout(function () {
+	            	$('.has-submenu a').click()
+	            }, 0)
+	        } else {
+	            isFullScreen = true
+	            doFullScreen()
+	        }
+	    }, false)
+
+	    $('#post_submit').click(function () {
+			document.getElementById('p_detail').value = editor.txt.html();
+			document.getElementById('form').submit();
+		})
+	</script>
 </html>

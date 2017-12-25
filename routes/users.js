@@ -11,6 +11,8 @@ module.exports = function (app) {
         res.render('loginUp')
     });
 
-
+    app.get('/profile', function (req, res) {
+    	res.render('profile')
+    })
 }
 
