@@ -169,7 +169,14 @@ $(document).ready(function () {
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word-2.svg)");
         // init();
-        textBoxShow();
+        // textBoxShow();
+        if($("#canvasInput").is(':visible'))
+        {
+            $("#canvasInput").hide();
+        }
+        else{
+            $("#canvasInput").show();            
+        }
         penType = 'text';
     });
     $('#rubber').click(function () {

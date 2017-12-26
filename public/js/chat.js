@@ -107,9 +107,9 @@ function openAudio() {
             setTimeout(function () {
                 if (offOrOn) {
                     socket.emit('audiomore', gRecorder.getBlob());
-                    console.log("发送长度：" + gRecorder.getBlob().size);
-                    console.info("发送类型：" + typeof (gRecorder.getBlob()));
-                    console.log("发送" + gRecorder.getBlob());
+                    // console.log("发送长度：" + gRecorder.getBlob().size);
+                    // console.info("发送类型：" + typeof (gRecorder.getBlob()));
+                    // console.log("发送" + gRecorder.getBlob());
                     gRecorder.clear();
                     gRecorder.stop();
                 }

@@ -42,7 +42,7 @@ audio {
     position: absolute;
     width:30px;
     height:30px;
-    background: url("../img/max.png");
+    background: url("../img/play.png");
     background-size: contain;
     right:0;
     z-index: 3;

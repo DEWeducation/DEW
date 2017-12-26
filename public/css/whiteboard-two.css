@@ -48,7 +48,7 @@ html,body{
    top: 3%;
     height: 60px;
     width: 60px;
-    background-image: url(../img/whiteboard-tools/maximize.svg);
+    background-image: url(../img/play.png);
     background-size: cover;
 }
 #video-icon{
@@ -105,8 +105,6 @@ canvas {
     position: absolute;
     right: 0;
     top: 0;
-    height: 100%; 
-    width: 100%; 
     display: block;
 }
 

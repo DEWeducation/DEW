@@ -18,9 +18,25 @@
 
     <link rel="stylesheet" href="../css/leaflet.css"/>
     <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
     <script src="../js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <style>
+         canvas {
+            position: absolute;
+            left: 100px;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            display: block;
+        }
+
+        #canvasdiv {
+            position: relative;
+            width: 700px;
+            height: 700px;
+        }
         #txtCon {
             resize: none;
             width: 180px;
@@ -35,6 +51,10 @@
             position: absolute;
             top: 50px;
             right: 80px;
+        }
+        #itemUl li {
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
@@ -212,6 +232,9 @@
 </div>
 
 <div class="page-main user-main">
+        <div id="canvasdiv" style="float: right;margin-right:200px;margin-top:-100px;">
+              
+        </div>
     <div class="container">
         <div class="row">
             <div class="span4">
@@ -222,6 +245,8 @@
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
+                                
+                                </li>
                                 <li>
                                     <a href="#">我的订单</a>
                                 </li>
@@ -234,6 +259,12 @@
                                 <li>
                                     <a href="#">学币充值</a>
                                 </li>
+                                <li>
+                                        <a id="getMyCourseBtn" href="javascript:void(0);">视频记录</a>
+                                        <ul id="itemUl">
+
+                                        </ul>
+                                    
                             </ul>
                         </div>
                     </div>
@@ -280,10 +311,18 @@
             </div>
         </div>
     </div>
+    
 </div>
-</body>
 
-<script src="../js/jquery-1.9.1.min.js"></script>
+</body>
+<script>
+        $('#getMyCourseBtn').click(function () {
+            requestMyVideoList()
+            // reDraw()
+        })
+    
+    </script>
+
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/leaflet.js"></script>
 <script src="../js/jquery.fitvids.js"></script>
@@ -291,5 +330,6 @@
 <script src="../js/jquery.bxslider.js"></script>
 <script src="../js/main-menu.js"></script>
 <script src="../js/template.js"></script>
-
+<script src="../js/reDraw.js"></script>
+<script src="../js/chat.js"></script>
 </html>

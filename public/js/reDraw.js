@@ -50,7 +50,7 @@ $('#canvas2').css("z-index", 2);
         var itemUl = document.getElementById('itemUl');
         var li = document.createElement("li");
         var a = document.createElement("a");
-        var t = document.createTextNode(getData);
+        var t = document.createTextNode("视频1");
         a.appendChild(t);
         li.appendChild(a);
         if(getData=="end"){

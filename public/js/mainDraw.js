@@ -7,8 +7,9 @@ var canvas0, canvas1, canvas2, ctx0, ctx1, ctx2;
 var penType = "pencil", penColer = "#0000cc", penSize = "2";
 var canvasWidth = document.getElementById('canvasdiv').clientWidth;
 var canvasHeight = document.getElementById('canvasdiv').clientHeight;
-
+FULLSCREEN = false;
 var canvasOffsetTop = $("#canvasdiv").offset().top //canvas相对浏览器窗口的偏移量
+var canvasOffsetTopStatic = canvasOffsetTop;
 var canvasOffsetLeft = $("#canvasdiv").offset().left //canvas相对浏览器窗口的偏移量
 var canvasDiv = document.getElementById('canvasDiv');
 // $("#elem").position().top        //相对父元素的位置坐标：
@@ -29,15 +30,15 @@ ctx2 = canvas2.getContext('2d');
 $('#canvas1').css("z-index", 1);
 $('#canvas2').css("z-index", 2);
 
- $('#color').colpick({
-        flat: true,
-        layout: 'hex',
-        submit: 0,
-        color:'0000cc',
-        onChange: function (hsb, hex, rgb, el, bySetColor) {
-          penColer = "#"+hex;
-        }
-    });
+$('#color').colpick({
+    flat: true,
+    layout: 'hex',
+    submit: 0,
+    color: '0000cc',
+    onChange: function (hsb, hex, rgb, el, bySetColor) {
+        penColer = "#" + hex;
+    }
+});
 
 // 回放相关
 var uptime = 0;
@@ -58,13 +59,14 @@ window.addEventListener("resize", resizeCanvas, false);
 function resizeCanvas() {
     // w = canvas.width = window.innerWidth;
     // h = canvas.height = window.innerHeight;
-   
+    
     if (penType != 'rubber') {
         var image = new Image();
         image.src = canvas2.toDataURL();
 
         image.onload = function () {
             ctx1.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasWidth, canvasHeight);
+            console.log("canvasHeight" + canvasHeight + " image.hight " + image.height);
             cleanCtx();
         }
     }
@@ -119,7 +121,7 @@ function mouseDown(e) {
 
     downX = e.clientX - canvasOffsetLeft
     downY = e.clientY - canvasOffsetTop
-
+    console.log("Y: " + e.clientY + "OffestY: " + (canvasOffsetTopStatic != $("#canvasdiv").offset().top ? 0 : canvasOffsetTopStatic));
     ctx2.strokeStyle = penColer;
     ctx1.strokeStyle = penColer;
     ctx2.lineWidth = penSize;
@@ -147,6 +149,7 @@ function mouseDown(e) {
 }
 
 function mouseMove(e) {
+    // canvasOffsetTop = canvasOffsetTopStatic != $("#canvasdiv").offset().top ? 0 : canvasOffsetTopStatic;
     if (canDraw && downOrUp == 'up') {
         e = e || window.event;
         lastTime = new Date().getTime();
@@ -154,6 +157,8 @@ function mouseMove(e) {
         if (penType == "pencil") {
             // ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop);
             ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
+            // console.log("CLIENTY: " + e.clientY + " OFFSET: " + canvasOffsetTop)
+            // console.log("DIV OFFSET: "+ $("#canvas1").offset().top +" EPAGE: "+ e.pageY+ " ECHILENTY: " +e.clientY);
             ctx2.stroke();
         }
         else if (penType == 'line') {
@@ -254,8 +259,12 @@ function mouseUp(e) {
     if (penType != 'rubber') {
         var image = new Image();
         image.src = canvas2.toDataURL();
+        
+        
         image.onload = function () {
-            ctx1.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasWidth, canvasHeight);
+            ctx1.drawImage(image, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+            // ctx1.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasWidth, canvasHeight);
+            
             cleanCtx();
         }
     }

@@ -96,7 +96,7 @@ module.exports = function (io) {
         });
 
         socket.on('fullScreen', function (data) {
-            console.log(data)
+            console.log("fullScreen"+data)
         })
         //重新绘制
         socket.on('redraw', function (re) {
