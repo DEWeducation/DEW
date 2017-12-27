@@ -71,6 +71,9 @@ module.exports = function (app) {
     app.get('/whiteboard2', function (req, res, next) {
         res.render('whiteboard-two')
     })
+    app.get('/whiteboard3', function (req, res, next) {
+        res.render('FUCK')
+    })
 
     app.get('/myvideo', function (req, res, next) {
         res.render('myvideo')

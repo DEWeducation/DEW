@@ -1,0 +1,194 @@
+<html>
+
+<head>
+    <title>WhiteBoard-Two</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #world {
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+
+        #contents {
+            position: absolute;
+            width: 15%;
+            height: 100%;
+            background-color: antiquewhite;
+            display: inline-block;
+            overflow: scroll;
+        }
+
+        #whiteboard {
+            position: absolute;
+            right: 0;
+            height: 100%;
+            width: 83%;
+            background-color: aquamarine;
+            display: inline-block;
+            overflow: scroll;
+        }
+
+        .canvas-item {
+            width: 80%;
+            height: 100px;
+            background-color: bisque;
+            margin: 0px auto 10px auto;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        #add {
+            margin: 40px auto 10px 40%;
+            height: 20px;
+        }
+
+        canvas {
+            position: absolute;
+        }
+
+        #canvas0 {
+            background-color: aliceblue;
+        }
+    </style>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+
+<body>
+    <div id="world">
+        <!-- 目录 -->
+        <div id="contents">
+            <canvas id="fuck-canvas" hidden></canvas>
+            <div class="canvas-item"></div>
+            <div class="canvas-item">
+                <button id="add">Add</button>
+            </div>
+
+        </div>
+        <div id="whiteboard">
+
+        </div>
+    </div>
+</body>
+<script>
+
+    var fuck_canvas = document.getElementById('fuck-canvas');
+
+    // Insert canvas elements
+    var whiteboard = document.getElementById('whiteboard');
+
+    // 画2上
+    var canvas2 = document.createElement("canvas");
+    canvas2.setAttribute("width", whiteboard.clientWidth);
+    canvas2.setAttribute("height", whiteboard.clientHeight);
+    canvas2.setAttribute("id", "canvas2");
+    whiteboard.appendChild(canvas2);
+
+    // 印1山
+    var canvas1 = document.createElement("canvas");
+    canvas1.setAttribute("width", whiteboard.clientWidth);
+    canvas1.setAttribute("height", whiteboard.clientHeight);
+    canvas1.setAttribute("id", "canvas1");
+    whiteboard.appendChild(canvas1);
+
+    // 本来的翻页，现在保留
+    var canvas0 = document.createElement("canvas");
+    canvas0.setAttribute("width", whiteboard.clientWidth);
+    canvas0.setAttribute("height", whiteboard.clientHeight);
+    canvas0.setAttribute("id", "canvas0");
+    whiteboard.appendChild(canvas0);
+
+
+    // 添加一页
+    function addItem(event) {
+        event.stopPropagation();
+        var addDiv = document.getElementById('add').parentNode;
+        var content = addDiv.parentNode;
+        var newItem = document.createElement("div");
+        newItem.setAttribute("class", "canvas-item")
+        content.insertBefore(newItem, addDiv);
+
+        $(".canvas-item").on("click", function () {
+            var index = $(".canvas-item").index(this);
+            console.log(this)
+            // alert(index);
+            fuckJump(index * whiteboard.clientHeight);
+        });
+
+        // 画分割线
+        var ctx1 = document.getElementById("canvas1").getContext("2d")
+        ctx1.beginPath();
+        ctx1.strokeStyle = "#ccc"
+        ctx1.moveTo(50, canvas0.height - 10);
+        ctx1.lineTo(1000, canvas0.height - 10);
+        ctx1.stroke();
+        ctx1.closePath();
+        var data = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+
+        fuck_ctx = document.getElementById("fuck-canvas").getContext("2d");
+        var last_data = ctx1.getImageData(0, canvas0.height - whiteboard.clientHeight, canvas1.width, canvas1.height)
+        fuck_ctx.putImageData(last_data, 0, 0);
+
+        $('#contents div').last().prev('div').prev('div').css("background-image", 'url("' + fuck_canvas.toDataURL() + '")');
+
+
+
+        // 增大画布
+        canvas0.setAttribute("height", canvas0.height + whiteboard.clientHeight)
+        canvas1.setAttribute("height", canvas1.height + whiteboard.clientHeight)
+        canvas2.setAttribute("height", canvas2.height + whiteboard.clientHeight)
+        ctx1.putImageData(data, 0, 0)
+
+        // 自动滚动到末尾
+        addDiv.parentNode.scrollTop = addDiv.parentNode.scrollHeight;
+        canvas0.parentNode.scrollTop = canvas0.parentNode.scrollHeight;
+
+    }
+    // 点击add按钮，新添一页
+    addButton = document.getElementById('add');
+    addButton.addEventListener("click", addItem, false);
+
+
+    // 测试方法 
+    function exportCanvasAsPNG(id, fileName) {
+
+        var canvasElement = document.getElementById(id);
+
+        var MIME_TYPE = "image/png";
+
+        var imgURL = canvasElement.toDataURL(MIME_TYPE);
+
+        var dlLink = document.createElement('a');
+        dlLink.download = fileName;
+        dlLink.href = imgURL;
+        dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        document.body.removeChild(dlLink);
+    }
+
+    function fuckJump(pageNum) {
+        canvas0.parentNode.scrollTop = pageNum;
+    }
+
+    // $(".canvas-item").click(function () {
+    $(".canvas-item").on("click", function () {
+        var index = $(".canvas-item").index(this);
+        console.log(this)
+        // alert(index);
+        fuckJump(index * whiteboard.clientHeight);
+    });
+
+</script>
+<script src="../js/colpick.js" type="text/javascript"></script>
+<script src="../js/mainDrawA.js"></script>
+
+</html>
