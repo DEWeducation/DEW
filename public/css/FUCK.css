@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#world {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+#contents {
+    position: absolute;
+    width: 15%;
+    height: 100%;
+    background-color: antiquewhite;
+    display: inline-block;
+    overflow: scroll;
+}
+
+#whiteboard {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 83%;
+    background-color: aquamarine;
+    display: inline-block;
+    overflow: scroll;
+}
+
+.canvas-item {
+    width: 80%;
+    height: 100px;
+    background-color: bisque;
+    margin: 0px auto 10px auto;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.boxShadow {
+    -webkit-box-shadow: #999 0px 0px 8px;
+    -moz-box-shadow: #999 0px 0px 8px;
+    box-shadow: #999 0px 0px 8px;
+}
+
+#add {
+    margin: 40px auto 10px 40%;
+    height: 20px;
+}
+
+canvas {
+    position: absolute;
+}
+
+#canvas0 {
+    background-color: aliceblue;
+}
+
+#tools {
+    background-color: antiquewhite;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+}
+
+#tools div {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: aquamarine;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+}
+
+#rule {
+    background-image: url(../img/whiteboard-tools/rule.svg);
+    background-size: cover;
+}
+
+#pencil-one {
+    left: 50px;
+    background-image: url(../img/whiteboard-tools/pen1.svg);
+    background-size: cover;
+}
+
+#pencil-two {
+    left: 100px;
+    background-image: url(../img/whiteboard-tools/pen2.svg);
+    background-size: cover;
+}
+
+#paintbrush {
+    left: 150px;
+    background-image: url(../img/whiteboard-tools/pen3.svg);
+    background-size: cover;
+}
+
+#color {
+    left: 200px;
+    border: 21 solid rgba(1, 1, 1, 1);
+}
+
+.colpick_color {
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+#rubber {
+    left: 250px;
+    background-image: url(../img/whiteboard-tools/rubber.svg);
+    background-size: cover;
+}
+
+#shape {
+    left: 300px;
+    background-image: url(../img/whiteboard-tools/shape.svg);
+    background-size: cover;
+}
+
+#word {
+    left: 350px;
+    background-image: url(../img/whiteboard-tools/word.svg);
+    background-size: cover;
+}
+
+#clearAll {
+    left: 400px;
+    background-image: url(../img/whiteboard-tools/trash.svg);
+    background-size: cover;
+}
+
+#record {
+    left: 450px;
+    background: url("../img/pause.png");
+    background-size: contain;
+}
+
+#shape div {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background-color: #CCCCCC;
+    /*border:1px solid black;*/
+    position: relative;
+    left: 40px;
+    top: -100px;
+    z-index: 5;
+}
+
+#sanjian {
+    background: url("../img/sanjianxing.png");
+    background-size: contain;
+    overflow: visible;
+}
+
+#zhijiaosanjiao {
+    background: url("../img/zhijiao.png");
+    background-size: contain;
+}
+
+#yuan {
+    background: url("../img/Circle_244px_1198167_easyicon.net.png");
+    background-size: contain;
+}
+
+#fang {
+    background: url("../img/Square_343px_1198766_easyicon.net.png");
+    background-size: contain;
+}
+
+#jvxing {
+    background: url("../img/jvxing.png");
+    background-size: contain;
+}
+
+#canvasInput {
+    font-size: 40px;
+    width: 785px;
+    height: 60px;
+    position: absolute;
+    z-index: 2;
+    top: -100%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+

@@ -16,6 +16,8 @@ var DrawSchema = new mongoose.Schema({
     penSize: Number,
     mouseTime: Number,
     canvaseMess: String,
+    newPage: Number,
+    jumpPage: Number,
     time: {
         type: Date,
         default: Date.now()

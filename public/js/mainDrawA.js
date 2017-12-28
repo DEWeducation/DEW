@@ -60,14 +60,13 @@ window.addEventListener("resize", resizeCanvas, false);
 function resizeCanvas() {
     // w = canvas.width = window.innerWidth;
     // h = canvas.height = window.innerHeight;
-    
+
     if (penType != 'rubber') {
         var image = new Image();
         image.src = canvas2.toDataURL();
 
         image.onload = function () {
             ctx1.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasWidth, canvasHeight);
-            console.log("canvasHeight" + canvasHeight + " image.hight " + image.height);
             cleanCtx();
         }
     }
@@ -116,15 +115,19 @@ function chooseSize(s) {
     return false;
 }
 
-
+function jumpPage(num){
+    socket.emit('jumpPage', num,new Date().getTime());
+}
+function newPage(data) {
+    socket.emit('newPage',new Date().getTime());
+}
 
 function mouseDown(e) {
 
-    console.log("mouseDown e.clientY:  " +e.clientY + "e.offsetY" + e.offsetY);
     canDraw = true;
 
-    downX = e.clientX - canvasOffsetLeft
-    downY = e.offsetY;
+    downx = e.clientX - canvasOffsetLeft
+    downy = e.offsetY;
     ctx2.strokeStyle = penColer;
     ctx1.strokeStyle = penColer;
     ctx2.lineWidth = penSize;
@@ -135,19 +138,21 @@ function mouseDown(e) {
     e = e || window.event;
     starTime = new Date().getTime();
 
-    socket.emit('downorup', 'down', downX / canvasWidth, downY / canvasHeight, (e.clientX - canvasOffsetLeft) / canvasWidth, (e.clientY - canvasOffsetTop) / canvasHeight, penType, penColer, penSize, starTime);
+    socket.emit('downorup', 'down', downx / canvasWidth, downy / canvasHeight, 
+    (downX) / canvasWidth, (downY) / canvasHeight, 
+    penType, penColer, penSize, starTime);
 
     if (penType == 'text') {
         ctx2.fillStyle = penColer;
         ctx2.font = parseInt(penSize) * 10 + "px" + " Georgia";
-        ctx2.fillText($("#canvasInput").val(), parseInt(downX), parseInt(downY));
+        ctx2.fillText($("#canvasInput").val(), parseInt(downx), parseInt(downy));
         CanvasMess = $("#canvasInput").val();
         $("#canvasInput").val("");
         // alert(CanvasMess)
     } else {
         CanvasMess = "";
 
-        ctx2.moveTo(downX, downY);
+        ctx2.moveTo(downx, downy);
     }
 }
 
@@ -159,7 +164,7 @@ function mouseMove(e) {
         lastTime = new Date().getTime();
 
         if (penType == "pencil") {
-           
+
             ctx2.lineTo(downX, downY);
 
             ctx2.stroke();
@@ -167,66 +172,66 @@ function mouseMove(e) {
         else if (penType == 'line') {
             ctx2.beginPath();
             cleanCtx();
-            ctx2.moveTo(downX, downY);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
+            ctx2.moveTo(downx, downy);
+            ctx2.lineTo(downX, downY);
             ctx2.stroke();
             ctx2.closePath();
         }
         else if (penType == 'sanjian') {
             ctx2.beginPath();
             cleanCtx();
-            ctx2.moveTo(downX, downY);
-            ctx2.lineTo(downX * 2 - (e.clientX - canvasOffsetLeft), e.clientY - canvasOffsetTop);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
+            ctx2.moveTo(downx, downy);
+            ctx2.lineTo(downx * 2 - (downX), downY);
             ctx2.lineTo(downX, downY);
+            ctx2.lineTo(downx, downy);
             ctx2.stroke();
         } else if (penType == 'zhijiaosanjiao') {
             ctx2.beginPath();
             cleanCtx();
-            ctx2.moveTo(downX, downY);
-            ctx2.lineTo(downX, e.clientY - canvasOffsetTop);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
+            ctx2.moveTo(downx, downy);
+            ctx2.lineTo(downx, downY);
             ctx2.lineTo(downX, downY);
+            ctx2.lineTo(downx, downy);
             ctx2.stroke();
         } else if (penType == 'jvxing') {
             ctx2.beginPath();
             cleanCtx();
-            ctx2.moveTo(downX, downY);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, downY);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop);
-            ctx2.lineTo(downX, e.clientY - canvasOffsetTop);
+            ctx2.moveTo(downx, downy);
+            ctx2.lineTo(downX, downy);
             ctx2.lineTo(downX, downY);
+            ctx2.lineTo(downx, downY);
+            ctx2.lineTo(downx, downy);
             ctx2.stroke();
         } else if (penType == 'fang') {
             ctx2.beginPath();
             cleanCtx();
-            ctx2.moveTo(downX, downY);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, downY);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft, downY + e.clientX - canvasOffsetLeft - downX);
-            ctx2.lineTo(downX, downY + e.clientX - canvasOffsetLeft - downX);
-            ctx2.lineTo(downX, downY);
+            ctx2.moveTo(downx, downy);
+            ctx2.lineTo(downX, downy);
+            ctx2.lineTo(downX, downy + downX - downx);
+            ctx2.lineTo(downx, downy + downX - downx);
+            ctx2.lineTo(downx, downy);
             ctx2.stroke();
         } else if (penType == 'yuan') {
             cleanCtx();
             ctx2.beginPath();
-            var radii = Math.sqrt((downX - e.clientX + canvasOffsetLeft) * (downX - e.clientX + canvasOffsetTop) + (downY - e.clientY + canvasOffsetTop) * (downY - e.clientY + canvasOffsetTop));
-            ctx2.arc(downX, downY, radii, 0, Math.PI * 2, false);
+            var radii = Math.sqrt((downx - downX) * (downx - downX) + (downy - downY) * (downy - downY));
+            ctx2.arc(downx, downy, radii, 0, Math.PI * 2, false);
             ctx2.stroke();
         } else if (penType == 'rubber') {
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
-            ctx2.moveTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop - penSize * 7);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft + penSize * 5, e.clientY - canvasOffsetTop - penSize * 7);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft + penSize * 5, e.clientY - canvasOffsetTop + penSize * 5);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop + penSize * 5);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop - penSize * 7);
+            ctx2.moveTo(downX - penSize * 6, downY - penSize * 7);
+            ctx2.lineTo(downX + penSize * 5, downY - penSize * 7);
+            ctx2.lineTo(downX + penSize * 5, downY + penSize * 5);
+            ctx2.lineTo(downX - penSize * 6, downY + penSize * 5);
+            ctx2.lineTo(downX - penSize * 6, downY - penSize * 7);
             ctx2.stroke();
             // ctx2.clearRect(e.clientX-98 - canvasLeft - penSize * 6, e.clientY-60 - canvasTop - penSize * 6, penSize * 12, penSize * 12);
-            ctx1.clearRect(e.clientX - canvasOffsetLeft - penSize * 5, e.clientY - canvasOffsetTop - penSize * 5, penSize * 10, penSize * 10);
+            ctx1.clearRect(downX - penSize * 5, downY - penSize * 5, penSize * 10, penSize * 10);
         }
 
-        socket.emit('message', downX / canvasWidth, downY / canvasHeight, (e.clientX - canvasOffsetLeft) / canvasWidth, (e.clientY - canvasOffsetTop) / canvasHeight, penType, penColer, penSize, lastTime);
+        socket.emit('message', downx / canvasWidth, downy / canvasHeight, (downX) / canvasWidth, (downY) / canvasHeight, penType, penColer, penSize, lastTime);
         // socket.emit('message', downX, downY, e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop, penType, penColer, penSize, lastTime);
         // console.log('发送：', downX, downY, e.clientX-canvasOffsetLeft, e.clientY-60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize,lastTime);
 
@@ -235,18 +240,18 @@ function mouseMove(e) {
             cleanCtx();
             ctx2.beginPath();
             // ctx2.arc(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop, 10, 0, Math.PI * 2, false);
-            ctx2.arc(e.clientX - canvasOffsetLeft, e.offsetY, 10, 0, Math.PI * 2, false);
+            ctx2.arc(downX, e.offsetY, 10, 0, Math.PI * 2, false);
             ctx2.stroke();
         } else if (penType == 'rubber') {
             // alert("jfk");
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
-            ctx2.moveTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop - penSize * 7);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft + penSize * 5, e.clientY - canvasOffsetTop - penSize * 7);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft + penSize * 5, e.clientY - canvasOffsetTop + penSize * 5);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop + penSize * 5);
-            ctx2.lineTo(e.clientX - canvasOffsetLeft - penSize * 6, e.clientY - canvasOffsetTop - penSize * 7);
+            ctx2.moveTo(downX - penSize * 6, downY - penSize * 7);
+            ctx2.lineTo(downX + penSize * 5, downY - penSize * 7);
+            ctx2.lineTo(downX + penSize * 5, downY + penSize * 5);
+            ctx2.lineTo(downX - penSize * 6, downY + penSize * 5);
+            ctx2.lineTo(downX - penSize * 6, downY - penSize * 7);
             ctx2.stroke();
         }
     }
@@ -257,18 +262,15 @@ function mouseUp(e) {
     e = e || window.event;
     uptime = new Date().getTime();
 
-    socket.emit('downorup', 'up', downX / canvasWidth, downY / canvasHeight, (e.clientX - canvasOffsetLeft) / canvasWidth, (e.clientY - canvasOffsetTop) / canvasHeight, penType, penColer, penSize, uptime, CanvasMess);
+    socket.emit('downorup', 'up', downx / canvasWidth, downy / canvasHeight, (downX) / canvasWidth, (downY) / canvasHeight, penType, penColer, penSize, uptime, CanvasMess);
 
-    // socket.emit('downorup', 'up', downX, downY, e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop, penType, penColer, penSize, uptime, CanvasMess);
     if (penType != 'rubber') {
         var image = new Image();
         image.src = canvas2.toDataURL();
-        
-        // console.log("ClientY: " + e.clientY + "OffsetY: " + e.offsetY)
+
         image.onload = function () {
             ctx1.drawImage(image, 0, 0, canvas1.width, canvas1.height, 0, 0, canvas1.width, canvas1.height);
-            // ctx1.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasWidth, canvasHeight);
-            // exportCanvasAsPNG("canvas1", 'a.png')
+
             cleanCtx();
         }
     }
@@ -282,12 +284,12 @@ function mouseOut(e) {
 
 (function receive() {
     socket.on('message', function (downx, downy, penx, peny, pentype, pencolor, pensize) {
-        console.log(downx, downy, penx, peny, pentype, pencolor, pensize)
+        // console.log(downx, downy, penx, peny, pentype, pencolor, pensize)
         downx = downx * canvasWidth;
         downy = downy * canvasHeight;
         penx = penx * canvasWidth;
         peny = peny * canvasHeight;
-        console.info(downx, downy, penx, peny, pentype, pencolor, pensize)
+        // console.info(downx, downy, penx, peny, pentype, pencolor, pensize)
 
         // console.log("收到：", pentype, penx, peny, pencolor, pensize);
         ctx2.strokeStyle = pencolor;
@@ -384,7 +386,7 @@ function mouseOut(e) {
                 var image = new Image();
                 image.src = canvas2.toDataURL();
                 image.onload = function () {
-                    ctx1.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasWidth, canvasHeight);
+                    ctx1.drawImage(image, 0, 0, canvas1.width, canvas1.height, 0, 0, canvas1.width, canvas1.height);
                     cleanCtx();
                 }
             }
@@ -392,14 +394,22 @@ function mouseOut(e) {
         }
         // console.log(downorup,downx, downy, penx, peny, pentype, pencolor, pensize,mousetime)
     });
+
+    socket.on('jumpPage',function(num,time){
+        fuckJump(num);
+    });
+
+    socket.on('newPage', function(time){
+        newPageLocal("send");
+    });
 })();
 
 function cleanCtx(type) {
     if (type) {
-        ctx1.clearRect(0, 0, canvasWidth, canvasHeight);
-        ctx2.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx1.clearRect(0, 0, canvas0.width, canvas0.height);
+        ctx2.clearRect(0, 0, canvas0.width, canvas0.height);
     } else if (!type) {
-        ctx2.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx2.clearRect(0, 0, canvas0.width, canvas0.height);
     }
 }
 

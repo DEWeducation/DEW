@@ -3,9 +3,9 @@
  */
 $(document).ready(function () {
 
-    $("#Xboard #pad,#allChat").draggable({ stack: "#Xboard #pad,#allChat" })
-    $("#pad").draggable({ handle: "#move" });
-    $("#allChat").draggable({ handle: "#movePhone" });
+    // $("#Xboard #pad,#allChat").draggable({ stack: "#Xboard #pad,#allChat" })
+    // $("#pad").draggable({ handle: "#move" });
+    // $("#allChat").draggable({ handle: "#movePhone" });
 
     $("#canvasInput").hide();
     $("#pad").hide();
@@ -28,13 +28,19 @@ $(document).ready(function () {
 
     // };
 
-
-
-
-
-    $("#btnidid").click(function () {
-        reAudio();
+    $(record).on('click', function () {
+        var arr = ['url("../img/pause.png")', 'url("../img/play.png")'];
+        if (record.style.backgroundImage === arr[0]){
+            record.style.backgroundImage = arr[1];
+            //开始录音
+            openAudio();
+        }else{
+            record.style.backgroundImage = arr[0];
+            // 结束录音
+            closeAudio();
+        }
     });
+
 
     $('#rule').click(function () {
         $("#canvasInput").hide();
@@ -170,12 +176,11 @@ $(document).ready(function () {
         $('#word').css("background-image", "url(../img/whiteboard-tools/word-2.svg)");
         // init();
         // textBoxShow();
-        if($("#canvasInput").is(':visible'))
-        {
+        if ($("#canvasInput").is(':visible')) {
             $("#canvasInput").hide();
         }
-        else{
-            $("#canvasInput").show();            
+        else {
+            $("#canvasInput").show();
         }
         penType = 'text';
     });
@@ -187,7 +192,7 @@ $(document).ready(function () {
         $('#pencil-one').css("background-image", "url(../img/whiteboard-tools/pen1.svg)");
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
         $('#shape').css("background-image", "url(../img/whiteboard-tools/shape.svg)");
-        $('#world').css("cursor" ,"pointer");
+        $('#world').css("cursor", "pointer");
         // init();
         penType = 'rubber';
     });

@@ -9,6 +9,36 @@ module.exports = function (io) {
             console.log('a user disconnection');
         });
 
+        socket.on('jumpPage', function (num,time) {
+            socket.broadcast.emit('jumpPage',num);
+            var draw = new Draw({
+                userId: 123,
+                downOrUp: "",                
+                courseId: 333,
+                mouseTime: time,                
+                jumpPage: num
+            });
+
+            draw.save(function (err, darw){
+                if (err) return console.log(err);
+            })
+        });
+
+        socket.on('newPage', function(time){
+            socket.broadcast.emit('newPage', time);
+            var draw = new Draw({
+                userId: 123,
+                downOrUp: "",
+                courseId: 333,
+                mouseTime: time,
+                newPage: 1
+            });
+
+            draw.save(function (err, darw){
+                if (err) return console.log(err);
+            })
+        })
+
         //鼠标按下或抬起和笔的类型   转发+保存
         socket.on('downorup', function (downorup, downx, downy, penx, peny, pentype, pencolor, pensize, mousetime, CanvasMess) {
             socket.broadcast.emit('downorup', downorup, downx, downy, penx, peny, pentype, pencolor, pensize, mousetime, CanvasMess);
@@ -28,7 +58,6 @@ module.exports = function (io) {
                 penSize: pensize,
                 mouseTime: mousetime,
                 canvaseMess: CanvasMess
-
             });
 
             draw.save(function (err, draw) {
