@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+*::-webkit-scrollbar{
+    display:none;
+}
 
 #world {
     width: 100%;
@@ -79,33 +82,34 @@ canvas {
 
 #tools {
     background-color: rgba(0,0,0,0.1);;
-    height: 50px;
-    width: 100%;
+    height: 100%;
+    max-height: 700px;
+    width: 50px;
     position: fixed;
-    bottom: 0;
+    top: 50%;
+    right: 0;
     z-index: 10;
     -webkit-box-shadow: #999 0px 0px 8px;
     -moz-box-shadow: #999 0px 0px 8px;
     box-shadow: #999 0px 0px 8px;
+    overflow: scroll;
+    transform: translateY(-50%);
 }
 
 #tools > div {
-    display: inline-block;
+    /* position: absolute; */
     width: 50px;
     height: 50px;
     z-index: 1000;
-    position: absolute;
 }
 
-#tools:hover + div{
-    display: inline-block;
+#tools >div:hover{
     width: 50px;
     height: 50px;
     z-index: 1000;
-    position: absolute;
-    -webkit-box-shadow: #999 0px 0px 8px;
-    -moz-box-shadow: #999 0px 0px 8px;
-    box-shadow: #999 0px 0px 1px;
+    -webkit-box-shadow: #999 0px 0px 28px;
+    -moz-box-shadow: #999 0px 0px 28px;
+    box-shadow: #999 0px 0px 28px;
 }
 
 #rule {
@@ -114,25 +118,25 @@ canvas {
 }
 
 #pencil-one {
-    left: 50px;
+    /* left: 50px; */
     background-image: url(../img/whiteboard-tools/pen1.svg);
     background-size: cover;
 }
 
 #pencil-two {
-    left: 100px;
+    /* left: 100px; */
     background-image: url(../img/whiteboard-tools/pen2.svg);
     background-size: cover;
 }
 
 #paintbrush {
-    left: 150px;
+    /* left: 150px; */
     background-image: url(../img/whiteboard-tools/pen3.svg);
     background-size: cover;
 }
 
 #color {
-    left: 200px;
+    /* left: 200px; */
     border: 21 solid rgba(1, 1, 1, 1);
 }
 
@@ -142,7 +146,7 @@ canvas {
 }
 
 #rubber {
-    left: 250px;
+    /* left: 250px; */
     background-image: url(../img/whiteboard-tools/rubber.svg);
     background-size: cover;
 }
@@ -153,51 +157,51 @@ canvas {
     background-size: cover;
 } */
 #sanjian {
-    left: 300px;
+    /* left: 300px; */
     background: url("../img/whiteboard-tools/sanjiaoxing.svg");
     background-size: contain;
     overflow: visible;
 }
 
 #zhijiaosanjiao {
-    left: 350px;
+    /* left: 350px; */
     background: url("../img/whiteboard-tools/zhijiaosanjiaoxing.svg");
     background-size: contain;
 }
 
 #yuan {
-    left: 400px;
+    /* left: 400px; */
     background: url("../img/whiteboard-tools/yuan.svg");
     background-size: contain;
 }
 
 #fang {
-    left: 450px;
+    /* left: 450px; */
     background: url("../img/whiteboard-tools/zhengfangxing.svg");
     background-size: contain;
 }
 
 #jvxing {
-    left: 500px;
+    /* left: 500px; */
     background: url("../img/whiteboard-tools/changfangxing.svg");
     background-size: contain;
     background-repeat:no-repeat;
 }
 
 #word {
-    left: 550px;
+    /* left: 550px; */
     background-image: url(../img/whiteboard-tools/word.svg);
     background-size: cover;
 }
 
 #clearAll {
-    left: 600px;
+    /* left: 600px; */
     background-image: url(../img/whiteboard-tools/trash.svg);
     background-size: cover;
 }
 
 #record {
-    left: 650px;
+    /* left: 650px; */
     /* background: url("../img/whiteboard-tools/luyin.svg"); */
     background-size: contain;
 }
@@ -218,12 +222,12 @@ canvas {
 
 #canvasInput {
     font-size: 40px;
-    width: 785px;
-    height: 60px;
-    position: absolute;
-    z-index: 2;
-    top: -100%;
-    left: 40%;
-    transform: translate(-50%, -50%);
+    width: 505px;
+    height: 50px;
+    position: fixed;
+    z-index: 2000;
+    bottom: 10px;
+    right: 60px;
+    /* transform: translate(-50%, -50%); */
 }
 

@@ -86,8 +86,8 @@ colpick Color Picker / colpick.com
 /*Vertical hue bar*/
 .colpick_hue {
 	position: absolute;
-	top: -160px;
-	left: 42px;
+	top: 50px;
+	left: 15px;
 	width: 19px;
 	height: 156px;
 	border: 1px solid #aaa;

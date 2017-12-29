@@ -1,5 +1,6 @@
-var fuck_canvas = document.getElementById('fuck-canvas');
-
+var lastPage = 0;
+var totalPage = 0;
+var currentPage = 0;
 // Insert canvas elements
 var whiteboard = document.getElementById('whiteboard');
 
@@ -24,8 +25,32 @@ canvas0.setAttribute("height", whiteboard.clientHeight);
 canvas0.setAttribute("id", "canvas0");
 whiteboard.appendChild(canvas0);
 
+// 用来生成略缩图
+var canvas3 = document.createElement("canvas");
+canvas3.setAttribute("width", whiteboard.clientWidth);
+canvas3.setAttribute("height", whiteboard.clientHeight);
+canvas3.setAttribute("id", "canvas3");
+whiteboard.appendChild(canvas3);
+
+var ctx1 = document.getElementById("canvas1").getContext("2d")
+ctx1.beginPath();
+ctx1.strokeStyle = "#000";
+ctx1.moveTo(50, canvas0.height);
+ctx1.lineTo(1000, canvas0.height);
+ctx1.stroke();
+ctx1.closePath();
+ctx1.font = "30px Arial";
+ctx1.fillText(currentPage + 1, canvas0.width / 2, canvas0.height - 5);
 
 function newPageLocal(resove) { //如果resove === "send"，则是接收，否则是自己点击新增一页
+    if (lastPage !== totalPage) {
+        console.log("last", lastPage, "current", currentPage)
+        fuckJump(totalPage);
+        return;
+    }
+    lastPage++;
+    totalPage++;
+    currentPage = totalPage;
     $("#contents").children().each(function (i, n) {
         $(n).removeClass("boxShadow")
     })
@@ -42,42 +67,65 @@ function newPageLocal(resove) { //如果resove === "send"，则是接收，否�
     }
 
     $(".canvas-item").on("click", function () {
-        var index = $(".canvas-item").index(this);
 
+        var index = $(".canvas-item").index(this);
+        currentPage = index;
+        console.log("last", lastPage, "current", currentPage)
 
         $("#contents").children().each(function (i, n) {
-            $(n).removeClass("boxShadow")
+            $(n).removeClass("boxShadow");
         })
         $(this).addClass("boxShadow")
-        // alert(index);
+        // updateMini(index);
 
         if (resove != "send") {
             jumpPage(index); //发送给别人
         }
         fuckJump(index); // 自己跳
+        // lastPage = index;
     });
 
+    console.log("last", lastPage, "current", currentPage)
+
     var ctx1 = document.getElementById("canvas1").getContext("2d")
-    ctx1.beginPath();
-    ctx1.strokeStyle = "#ccc"
-    ctx1.moveTo(50, canvas0.height);
-    ctx1.lineTo(1000, canvas0.height);
-    ctx1.stroke();
-    ctx1.closePath();
+    // ctx1.beginPath();
+    // ctx1.strokeStyle = "#000"
+    // ctx1.moveTo(50, canvas0.height);
+    // ctx1.lineTo(1000, canvas0.height);
+    // ctx1.stroke();
+    // ctx1.closePath();
+    // ctx1.font="30px Arial";
+    // ctx1.fillText(currentPage,canvas0.width/2,canvas0.height-5);
     var data = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
 
+    // 新页略缩图
+    ctx3 = canvas3.getContext("2d");
+    var last_data = ctx1.getImageData(0, canvas1.height - whiteboard.clientHeight, canvas1.width, canvas1.height);
+    ctx3.putImageData(last_data, 0, 0);
+    var image = new Image();
+    image.src = canvas3.toDataURL();
+    // image.width = 100;
+    image.height = 100;
+    image.onload = function () {
+        ctx3.drawImage(image, 0, 0);
+    }
 
-    fuck_ctx = document.getElementById("fuck-canvas").getContext("2d");
-    var last_data = ctx1.getImageData(0, canvas0.height - whiteboard.clientHeight, canvas1.width, canvas1.height)
-    fuck_ctx.putImageData(last_data, 0, 0);
-
-    $('#contents div').last().prev('div').prev('div').css("background-image", 'url("' + fuck_canvas.toDataURL() + '")');
+    $('#contents div').last().prev('div').prev('div').css("background-image", 'url("' + canvas3.toDataURL() + '")');
 
     // 增大画布
     canvas0.setAttribute("height", canvas0.height + whiteboard.clientHeight)
     canvas1.setAttribute("height", canvas1.height + whiteboard.clientHeight)
     canvas2.setAttribute("height", canvas2.height + whiteboard.clientHeight)
     ctx1.putImageData(data, 0, 0)
+
+    ctx1.beginPath();
+    ctx1.strokeStyle = "#000"
+    ctx1.moveTo(50, canvas0.height);
+    ctx1.lineTo(1000, canvas0.height);
+    ctx1.stroke();
+    ctx1.closePath();
+    ctx1.font = "30px Arial";
+    ctx1.fillText(currentPage + 1, canvas0.width / 2, canvas0.height - 5);
 
     // 自动滚动到末尾
     addDiv.parentNode.scrollTop = addDiv.parentNode.scrollHeight;
@@ -118,6 +166,26 @@ function exportCanvasAsPNG(id, fileName) {
 
 function fuckJump(pageNum) {
     canvas0.parentNode.scrollTop = pageNum * whiteboard.clientHeight;
-    document.getElementById('add').parentNode.parentNode.scrollTop = (pageNum - 1) * fuck_canvas.height;
+    document.getElementById('add').parentNode.parentNode.scrollTop = (pageNum - 1) * addBtnDiv.clientHeight;
+    $("#contents").children().each(function (i, n) {
+        $(n).removeClass("boxShadow");
+        if (i === lastPage) {
+            // 刷新略缩图
+            ctx3 = canvas3.getContext("2d");
+            var last_data = ctx1.getImageData(0, i * whiteboard.clientHeight, canvas1.width, (i + 1) * whiteboard.clientHeight);
+            ctx3.putImageData(last_data, 0, 0);
+            var image = new Image();
+            image.src = canvas3.toDataURL();
+            // image.width = 100;
+            image.height = 100;
+            image.onload = function () {
+                ctx3.drawImage(image, 0, 0);
+            }
+            $(n).css("background-image", 'url("' + canvas3.toDataURL() + '")');
+        }
+        if (i === pageNum) {
+            $(n).addClass("boxShadow")
+        }
+    })
+    lastPage = pageNum;
 }
-

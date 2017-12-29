@@ -13,21 +13,20 @@
     <div id="world">
         <!-- 目录 -->
         <div id="contents">
-            <canvas id="fuck-canvas" hidden></canvas>
+            <!-- <canvas id="fuck-canvas" width="1000px" height="1000px"></canvas> -->
             <div class="canvas-item boxShadow"></div>
-            <div class="canvas-item">
+            <div class="canvas-item" id="addBtnDiv">
                 <button id="add"></button>
             </div>
 
         </div>
         <div id="whiteboard">
             <div id="tools">
-                <div id="rule"></div>
+                <div id="color"></div>
                 <div id="pencil-one"></div>
                 <div id="pencil-two"></div>
                 <div id="paintbrush"></div>
-                <div id="color"></div>
-                <div id="rubber"></div>
+                <div id="rule"></div>                
                 <!-- <div id="shape"></div> -->
                 <div id="sanjian"></div>
                 <div id="zhijiaosanjiao"></div>
@@ -36,10 +35,12 @@
                 <div id="yuan"></div>
 
                 <div id="word"></div>
+                <div id="rubber"></div>                
                 <div id="clearAll"></div>
                 <div id="record" style="background-image: url('../img/whiteboard-tools/luyin.svg'); "></div>
-                <input id="canvasInput" type="text" autofocus="autofocus">
             </div>
+            <input id="canvasInput" type="text" autofocus="autofocus">
+
         </div>
     </div>
 </body>
@@ -48,4 +49,5 @@
 <script src="../js/animate.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/chatA.js"></script>
+
 </html>

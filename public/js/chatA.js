@@ -20,6 +20,11 @@ function openAudio() {
     if (!navigator.getUserMedia) {
         alert("设备不支持聊天")
     }
+    // 记录开始时间，方便回放时同步
+    socket.emit("startTime",new Date().getTime());
+
+
+
     SRecorder.get(function (rec) {
         gRecorder = rec;
     });
@@ -277,7 +282,7 @@ SRecorder.get = function (callback) {
 
 
     socket.on('reAudio', function (data) {
-        // console.log("开始接收音频")
+        console.log("开始接收音频",new Date().getTime())
         Atime += 2;
         if (data != 'end') {
             var blob = new Blob([data], {type: 'audio/wav'});
@@ -286,7 +291,7 @@ SRecorder.get = function (callback) {
                 time: Atime + 2
             });
         } else {
-            console.log("音频接收完毕" + audioHistory.length);
+            console.log("音频接收完毕", audioHistory.length,new Date().getTime());
             for (var i = 0; i < audioHistory.length; i++) {
                 var _au = audioHistory[i];
                 (function _(_au) {

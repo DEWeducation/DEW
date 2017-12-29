@@ -5,6 +5,7 @@ var canReDraw = false;
 var canvas1, canvas2, ctx1, ctx2;
 var num = 0;
 var t;
+var recvNewPage = 2;
 /////////////////////////////////////////////
 var canvasWidth = document.getElementById('canvasdiv').clientWidth;
 var canvasHeight = document.getElementById('canvasdiv').clientHeight;
@@ -59,13 +60,23 @@ $('#canvas2').css("z-index", 2);
         a.addEventListener("click", function () {
             requestVideo(getData);
         })
+
+        ctx1.beginPath();
+        ctx1.strokeStyle = "#ccc"
+        ctx1.moveTo(50, canvas1.height);
+        ctx1.lineTo(canvasWidth - 50, canvas1.height);
+        ctx1.stroke();
+        ctx1.closePath();
+        ctx1.font = "30px Arial";
+        ctx1.fillText(1, canvas1.width / 2, canvas1.height - 5);
+
     })
 
     socket.on('responseVideo', function (data) {
         num++;
         //新操作踢掉两个if部分
         // if (data.downOrUp == "down" || data.downOrUp == "up") {
-
+        console.log("开始接收画面", new Date().getTime())
         drawHistory.push({
             downorup: data.downOrUp,
             downx: data.downX,
@@ -82,6 +93,7 @@ $('#canvas2').css("z-index", 2);
         });
 
         if (data == "end") {
+            console.log("画面接收完毕", new Date().getTime())
             canReDraw = true;
             num = 0;
             if (canReDraw) {
@@ -99,14 +111,11 @@ $('#canvas2').css("z-index", 2);
 
 
 function forHistory() {
-    cleanCtx(1);
+    // cleanCtx(1);
     clearTimeout(t);
-    // $("#canvas2").unbind();
     var firstTime = drawHistory[0].time;
-    // console.log(drawHistory);
     for (var i = 0; i < drawHistory.length; i++) {
         var _ = drawHistory[i];
-        // console.log("FUCK NEW:", _.newPage,"FUCK TIME:",_.time);
         (function _(_) {
             t = setTimeout(function () {
                 drawAgian(_.downorup, _.downx, _.downy, _.penx, _.peny, _.pentype, _.pencolor, _.pensize, _.mess, _.newPage, _.jumpPage)
@@ -149,19 +158,21 @@ function drawAgian(downorup, downx, downy, penx, peny, pentype, pencolor, pensiz
     //如果line down up 注意
 
     if (newPage) {
-        ctx1.beginPath();
-        ctx1.strokeStyle = "#ccc"
-        ctx1.moveTo(50, canvas1.height);
-        ctx1.lineTo(canvasWidth - 50, canvas1.height);
-        ctx1.stroke();
-        ctx1.closePath();
+
         var data = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
 
         // 增大画布
         canvas1.setAttribute("height", canvas1.height + canvasdiv.clientHeight)
         canvas2.setAttribute("height", canvas2.height + canvasdiv.clientHeight)
         ctx1.putImageData(data, 0, 0)
-
+        ctx1.beginPath();
+        ctx1.strokeStyle = "#ccc"
+        ctx1.moveTo(50, canvas1.height);
+        ctx1.lineTo(canvasWidth - 50, canvas1.height);
+        ctx1.stroke();
+        ctx1.closePath();
+        ctx1.font = "30px Arial";
+        ctx1.fillText(recvNewPage++, canvas1.width / 2, canvas1.height - 5);
         canvas1.parentNode.scrollTop = canvas1.parentNode.scrollHeight;
     }
 

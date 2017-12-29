@@ -7,6 +7,9 @@ html,body{
     min-width: 1000px;
     user-select: none;
 }
+body::-webkit-scrollbar{
+    display:none;
+}
 
 #world{
     width: 100%;

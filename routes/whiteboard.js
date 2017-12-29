@@ -9,22 +9,36 @@ module.exports = function (io) {
             console.log('a user disconnection');
         });
 
-        socket.on('jumpPage', function (num,time) {
-            socket.broadcast.emit('jumpPage',num);
+        socket.on('jumpPage', function (num, time) {
+            socket.broadcast.emit('jumpPage', num);
             var draw = new Draw({
                 userId: 123,
-                downOrUp: "",                
+                downOrUp: "",
                 courseId: 333,
-                mouseTime: time,                
+                mouseTime: time,
                 jumpPage: num
             });
 
-            draw.save(function (err, darw){
+            draw.save(function (err, darw) {
                 if (err) return console.log(err);
             })
         });
 
-        socket.on('newPage', function(time){
+        // 保存开始时间，方便回放（这个时间是声音开始的时间，但是保存到了draw表，就是为了同步
+        socket.on('startTime', function (time) {
+            var draw = new Draw({
+                userId: 123,
+                downOrUp: "",
+                courseId: 333,
+                mouseTime: time
+            });
+
+            draw.save(function (err, darw) {
+                if (err) return console.log(err);
+            })
+        });
+
+        socket.on('newPage', function (time) {
             socket.broadcast.emit('newPage', time);
             var draw = new Draw({
                 userId: 123,
@@ -34,7 +48,7 @@ module.exports = function (io) {
                 newPage: 1
             });
 
-            draw.save(function (err, darw){
+            draw.save(function (err, darw) {
                 if (err) return console.log(err);
             })
         })
@@ -114,8 +128,8 @@ module.exports = function (io) {
                 if (err) {
                     console.error('audio save error:', err);
                 }
-                console.info("audio save success");
-                console.info(audio.data);
+                // console.info("audio save success");
+                // console.info(audio.data);
             });
         });
 
@@ -125,11 +139,11 @@ module.exports = function (io) {
         });
 
         socket.on('fullScreen', function (data) {
-            console.log("fullScreen"+data)
+            console.log("fullScreen" + data)
         })
         //重新绘制
         socket.on('redraw', function (re) {
-            console.log(re + "someone ask history");
+            // console.log(re + "someone ask history");
 
             Draw.find({}, function (err, chunk) {
                 if (err) {
@@ -137,19 +151,19 @@ module.exports = function (io) {
                     return
                 }
                 var data;
-                console.log("开始读数据库");
+                // console.log("开始读数据库");
                 for (var i = 0; i < chunk.length; i++) {
                     data = chunk[i];
                     socket.emit('redraw', data);
                 }
                 socket.emit('redraw', "end");
-                console.log("数据库读取完毕");
+                // console.log("数据库读取完毕");
             });
 
         });
         //请求视频列表
         socket.on('requestMyVideoList', function (getData) {
-            console.log(getData);
+            // console.log(getData);
             Draw.distinct('courseId', { "userId": 123 }, function (err, chunk) {
                 if (err) {
                     console.error(err);
@@ -166,13 +180,12 @@ module.exports = function (io) {
         })
         //请求视频
         socket.on('requestVideo', function (getData) {
-            console.log(getData);
             Draw.find({ userId: getData.userId, courseId: getData.courseId }, function (err, chunk) {
                 if (err) {
                     console.error(err);
                     return
                 }
-                console.log('用户' + getData.userId + '请求requestVideo')
+                console.log('用户' + getData.userId + 'requestVideo')
                 var data;
                 for (var i = 0; i < chunk.length; i++) {
                     data = chunk[i];
@@ -184,22 +197,18 @@ module.exports = function (io) {
         })
         //重新播放
         socket.on('reAudio', function (yes) {
-            console.log(yes);
-
             Audio.find({}, function (err, audios) {
                 if (err) {
                     console.error("audio find erro");
                 }
-                // audios.sort({"id": 1});
-                console.log(audios.length)
                 for (var i = 0; i < audios.length; i++) {
                     var data = audios[i].data;
 
                     socket.emit('reAudio', data);
-                    // console.log(data)
+
                 }
                 socket.emit('reAudio', 'end');
-                console.log("结束了")
+
             });
         });
     });

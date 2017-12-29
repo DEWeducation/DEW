@@ -206,6 +206,11 @@ $(document).ready(function () {
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word-2.svg)");
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");        
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
         // init();
         // textBoxShow();
         if ($("#canvasInput").is(':visible')) {
@@ -223,7 +228,11 @@ $(document).ready(function () {
         $('#pencil-two').css("background-image", "url(../img/whiteboard-tools/pen2.svg)");
         $('#pencil-one').css("background-image", "url(../img/whiteboard-tools/pen1.svg)");
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
-        $('#shape').css("background-image", "url(../img/whiteboard-tools/shape.svg)");
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");        
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
         $('#world').css("cursor", "pointer");
         // init();
         penType = 'rubber';

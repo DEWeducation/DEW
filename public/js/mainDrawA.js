@@ -30,6 +30,7 @@ ctx2 = canvas2.getContext('2d');
 $('#canvas0').css("z-index", 0);
 $('#canvas1').css("z-index", 1);
 $('#canvas2').css("z-index", 2);
+$('#canvas3').css("z-index", -1);
 
 $('#color').colpick({
     flat: true,
@@ -227,23 +228,18 @@ function mouseMove(e) {
             ctx2.lineTo(downX - penSize * 6, downY + penSize * 5);
             ctx2.lineTo(downX - penSize * 6, downY - penSize * 7);
             ctx2.stroke();
-            // ctx2.clearRect(e.clientX-98 - canvasLeft - penSize * 6, e.clientY-60 - canvasTop - penSize * 6, penSize * 12, penSize * 12);
             ctx1.clearRect(downX - penSize * 5, downY - penSize * 5, penSize * 10, penSize * 10);
         }
 
         socket.emit('message', downx / canvasWidth, downy / canvasHeight, (downX) / canvasWidth, (downY) / canvasHeight, penType, penColer, penSize, lastTime);
-        // socket.emit('message', downX, downY, e.clientX - canvasOffsetLeft, e.clientY -canvasOffsetTop, penType, penColer, penSize, lastTime);
-        // console.log('发送：', downX, downY, e.clientX-canvasOffsetLeft, e.clientY-60 - document.getElementById('whiteboard').offsetTop, penType, penColer, penSize,lastTime);
 
     } else if ((!canDraw) && downOrUp == 'up') {
         if (penType == 'yuan') {
             cleanCtx();
             ctx2.beginPath();
-            // ctx2.arc(e.clientX - canvasOffsetLeft, e.clientY - canvasOffsetTop, 10, 0, Math.PI * 2, false);
             ctx2.arc(downX, e.offsetY, 10, 0, Math.PI * 2, false);
             ctx2.stroke();
         } else if (penType == 'rubber') {
-            // alert("jfk");
             ctx2.lineWidth = 1;
             cleanCtx();
             ctx2.beginPath();
