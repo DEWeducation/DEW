@@ -62,13 +62,22 @@ $("#sizebar").bind('mouseout', function () {
 $("#color").hover(function () {
     $(".colpick_hue").css("display", "block")
     // $(".colpick_hex_field").css("display","block")
-},
-    function () {
-        setTimeout ( function () {
-            $(".colpick_hue").css("display", "none")
-        },2000)
-        //  $(".colpick_hex_field").css("display","none")
+},function(){
+    $(".colpick_hue").hover(function () {
+        $(".colpick_hue").css("display", "block")
+        // $(".colpick_hex_field").css("display","block")
+    },function(){
+        $(".colpick_hue").css("display", "none");
     })
+}
+);
+
+    // function () {
+    //     setTimeout(function () {
+    //         $(".colpick_hue").css("display", "none")
+    //     }, 2000)
+    //     //  $(".colpick_hex_field").css("display","none")
+    // })
 
 $("#maxPad").bind('click', function (e) {
     if (padMax % 2 == 1) {//变小

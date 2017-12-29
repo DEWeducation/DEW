@@ -296,9 +296,9 @@ function getFaster() {
 }
 function cleanCtx(type) {
     if (type) {
-        ctx1.clearRect(0, 0, canvasWidth, canvasHeight);
-        ctx2.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+        ctx2.clearRect(0, 0, canvas1.width, canvas1.height);
     } else if (!type) {
-        ctx2.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx2.clearRect(0, 0, canvas1.width, canvas1.height);
     }
 }

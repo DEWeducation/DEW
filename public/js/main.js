@@ -29,7 +29,7 @@ $(document).ready(function () {
     // };
 
     $(record).on('click', function () {
-        var arr = ['url("../img/pause.png")', 'url("../img/play.png")'];
+        var arr = ['url("../img/whiteboard-tools/luyin.svg")', 'url("../img/whiteboard-tools/luyin2.svg")'];
         if (record.style.backgroundImage === arr[0]){
             record.style.backgroundImage = arr[1];
             //开始录音
@@ -46,9 +46,13 @@ $(document).ready(function () {
         $("#canvasInput").hide();
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule-2.svg)");
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
-        $('#shape').css("background-image", "url(../img/whiteboard-tools/shape.svg)");
+        // $('#shape').css("background-image", "url(../img/whiteboard-tools/shape.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
         // init();
         penType = 'line';
         console.log(penType);
@@ -61,9 +65,13 @@ $(document).ready(function () {
         $('#paintbrush').css("background-image", "url(../img/whiteboard-tools/pen3.svg)");
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
-        $('#shape').css("background-image", "url(../img/whiteboard-tools/shape.svg)");
+        // $('#shape').css("background-image", "url(../img/whiteboard-tools/shape.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
         penType = 'pencil';
         chooseSize('1')
         console.log("chooseSize 1")
@@ -78,7 +86,11 @@ $(document).ready(function () {
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#shape').css("background-image", "url(../img/whiteboard-tools/shape.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
         penType = 'pencil';
         chooseSize('3')
         console.log("chooseSize 3")
@@ -92,7 +104,11 @@ $(document).ready(function () {
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#shape').css("background-image", "url(../img/whiteboard-tools/shape.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
         $("#canvasInput").hide();
         penType = 'pencil';
         chooseSize('5')
@@ -109,11 +125,14 @@ $(document).ready(function () {
     });
     $('#sanjian').click(function () {
         $("#canvasInput").hide();
-        $('#shape').css("background-image", "url(../img/whiteboard-tools/shape-2.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing2.svg)");
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
         // init();
         penType = 'sanjian';
         console.log(penType);
@@ -122,11 +141,14 @@ $(document).ready(function () {
     $('#zhijiaosanjiao').click(function (e) {
         $("#canvasInput").hide();
         e.stopPropagation();
-        $('#shape').css("background-image", "url(../img/whiteboard-tools/shape-2.svg)");
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing2.svg)");
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
         // init();
         penType = 'zhijiaosanjiao';
         console.log(penType);
@@ -137,11 +159,15 @@ $(document).ready(function () {
         $("#canvasInput").hide();
         e.stopPropagation();
         // init();
-        $('#shape').css("background-image", "url(../img/whiteboard-tools/shape-2.svg)");
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing2.svg)");
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        // $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");        
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
         penType = 'fang';
         console.log(penType);
     });
@@ -149,11 +175,14 @@ $(document).ready(function () {
         $("#canvasInput").hide();
         e.stopPropagation();
         // init();
-        $('#shape').css("background-image", "url(../img/whiteboard-tools/shape-2.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing2.svg)");
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");        
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan.svg)");
         penType = 'jvxing';
         console.log(penType);
 
@@ -162,11 +191,14 @@ $(document).ready(function () {
         $("#canvasInput").hide();
         e.stopPropagation();
         // init();
-        $('#shape').css("background-image", "url(../img/whiteboard-tools/shape-2.svg)");
+        $('#yuan').css("background-image", "url(../img/whiteboard-tools/yuan2.svg)");
         $('#rule').css("background-image", "url(../img/whiteboard-tools/rule.svg)");
         $('#rubber').css("background-image", "url(../img/whiteboard-tools/rubber.svg)");
         $('#word').css("background-image", "url(../img/whiteboard-tools/word.svg)");
-
+        $('#zhijiaosanjiao').css("background-image", "url(../img/whiteboard-tools/zhijiaosanjiaoxing.svg)");
+        $('#sanjian').css("background-image", "url(../img/whiteboard-tools/sanjiaoxing.svg)");        
+        $('#fang').css("background-image", "url(../img/whiteboard-tools/zhengfangxing.svg)");
+        $('#jvxing').css("background-image", "url(../img/whiteboard-tools/changfangxing.svg)");
         penType = 'yuan';
     });
     $('#word').click(function () {

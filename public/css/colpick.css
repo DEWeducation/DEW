@@ -6,8 +6,8 @@ colpick Color Picker / colpick.com
 /*Main container*/
 .colpick {
 	position: absolute;
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	
 	display: none;
 	font-family: Arial, Helvetica, sans-serif;
@@ -33,8 +33,8 @@ colpick Color Picker / colpick.com
 /*Color selection box*/
 .colpick_color {
 	position: absolute;
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	overflow: hidden;
 	
 	cursor: crosshair;
@@ -43,8 +43,8 @@ colpick Color Picker / colpick.com
 	position: absolute;
 	left:0;
 	top:0;
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='#ffffff', endColorstr='#00ffffff'); /* IE6 & IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr='#ffffff', endColorstr='#00ffffff')"; /* IE8 */
 	background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
@@ -53,8 +53,8 @@ colpick Color Picker / colpick.com
 	position: absolute;
 	left:0;
 	top:0;
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#00000000', endColorstr='#000000'); /* IE6 & IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#00000000', endColorstr='#000000')"; /* IE8 */
 	background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
@@ -86,13 +86,15 @@ colpick Color Picker / colpick.com
 /*Vertical hue bar*/
 .colpick_hue {
 	position: absolute;
-	top: -97px;
-	left: 62px;
+	top: -160px;
+	left: 42px;
 	width: 19px;
 	height: 156px;
 	border: 1px solid #aaa;
 	cursor: n-resize;
-	display: none
+	display: none;
+	z-index: 1002;
+	/* transform:rotate(90deg); */
 }
 /*Hue bar sliding indicator*/
 .colpick_hue_arrs {
@@ -101,6 +103,7 @@ colpick Color Picker / colpick.com
 	width: 35px;
 	height: 7px;
 	margin: -7px 0 0 0;
+	
 }
 .colpick_hue_larr {
 	position:absolute;
@@ -124,7 +127,7 @@ colpick Color Picker / colpick.com
 	position: absolute;
 	left: 207px;
 	top: 6px;
-	width: 60px;
+	width: 50px;
 	height: 27px;
 	background: #f00;
 	border: 1px solid #8f8f8f;
@@ -135,7 +138,7 @@ display:none;
 	position: absolute;
 	left: 277px;
 	top: 6px;
-	width: 60px;
+	width: 50px;
 	height: 27px;
 	background: #f00;
 	border: 1px solid #8f8f8f;
@@ -144,7 +147,7 @@ display:none;
 .colpick_field, .colpick_hex_field  {
 	position: absolute;
 	height: 20px;
-	width: 60px;
+	width: 50px;
 	overflow:hidden;
 	background:#f3f3f3;
 	color:#b8b8b8;
@@ -337,8 +340,8 @@ display:none;
 	display:none;
 }
 .colpick_hex {
-	width:60px;
-	height:60px;
+	width:50px;
+	height:50px;
 }
 .colpick_hex .colpick_hex_field {
 	width:72px;
@@ -377,7 +380,7 @@ display:none;
 	width:80px;
 }
 .colpick_hex_ns .colpick_new_color{
-	width:60px;
+	width:50px;
 	border: 1px solid #8f8f8f;
 }
 

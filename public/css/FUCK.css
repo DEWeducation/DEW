@@ -6,7 +6,7 @@
 #world {
     width: 100%;
     height: 100%;
-    background-color: black;
+    /* background-color: black; */
 }
 
 #contents {
@@ -16,16 +16,22 @@
     background-color: antiquewhite;
     display: inline-block;
     overflow: scroll;
+    -webkit-box-shadow: #999 0px 0px 18px;
+    -moz-box-shadow: #999 0px 0px 18px;
+    box-shadow: #999 0px 0px 18px;
 }
 
 #whiteboard {
     position: absolute;
     right: 0;
     height: 100%;
-    width: 83%;
+    width: 84%;
     background-color: aquamarine;
     display: inline-block;
     overflow: scroll;
+    -webkit-box-shadow: #999 0px 0px 18px;
+    -moz-box-shadow: #999 0px 0px 18px;
+    box-shadow: #999 0px 0px 18px;
 }
 
 .canvas-item {
@@ -58,22 +64,23 @@ canvas {
 }
 
 #tools {
-    background-color: antiquewhite;
+    background-color: rgba(0,0,0,0.1);;
     height: 50px;
     width: 100%;
     position: fixed;
     bottom: 0;
     z-index: 10;
+    -webkit-box-shadow: #999 0px 0px 8px;
+    -moz-box-shadow: #999 0px 0px 8px;
+    box-shadow: #999 0px 0px 8px;
 }
 
-#tools div {
+#tools > div {
     display: inline-block;
     width: 50px;
     height: 50px;
-    background-color: aquamarine;
     z-index: 1000;
     position: absolute;
-    top: 0;
 }
 
 #rule {
@@ -115,27 +122,58 @@ canvas {
     background-size: cover;
 }
 
-#shape {
+/* #shape {
     left: 300px;
     background-image: url(../img/whiteboard-tools/shape.svg);
     background-size: cover;
+} */
+#sanjian {
+    left: 300px;
+    background: url("../img/whiteboard-tools/sanjiaoxing.svg");
+    background-size: contain;
+    overflow: visible;
+}
+
+#zhijiaosanjiao {
+    left: 350px;
+    background: url("../img/whiteboard-tools/zhijiaosanjiaoxing.svg");
+    background-size: contain;
+}
+
+#yuan {
+    left: 400px;
+    background: url("../img/whiteboard-tools/yuan.svg");
+    background-size: contain;
+}
+
+#fang {
+    left: 450px;
+    background: url("../img/whiteboard-tools/zhengfangxing.svg");
+    background-size: contain;
+}
+
+#jvxing {
+    left: 500px;
+    background: url("../img/whiteboard-tools/changfangxing.svg");
+    background-size: contain;
+    background-repeat:no-repeat;
 }
 
 #word {
-    left: 350px;
+    left: 550px;
     background-image: url(../img/whiteboard-tools/word.svg);
     background-size: cover;
 }
 
 #clearAll {
-    left: 400px;
+    left: 600px;
     background-image: url(../img/whiteboard-tools/trash.svg);
     background-size: cover;
 }
 
 #record {
-    left: 450px;
-    background: url("../img/pause.png");
+    left: 650px;
+    /* background: url("../img/whiteboard-tools/luyin.svg"); */
     background-size: contain;
 }
 
@@ -151,31 +189,7 @@ canvas {
     z-index: 5;
 }
 
-#sanjian {
-    background: url("../img/sanjianxing.png");
-    background-size: contain;
-    overflow: visible;
-}
 
-#zhijiaosanjiao {
-    background: url("../img/zhijiao.png");
-    background-size: contain;
-}
-
-#yuan {
-    background: url("../img/Circle_244px_1198167_easyicon.net.png");
-    background-size: contain;
-}
-
-#fang {
-    background: url("../img/Square_343px_1198766_easyicon.net.png");
-    background-size: contain;
-}
-
-#jvxing {
-    background: url("../img/jvxing.png");
-    background-size: contain;
-}
 
 #canvasInput {
     font-size: 40px;
