@@ -51,8 +51,22 @@
 }
 
 #add {
-    margin: 40px auto 10px 40%;
-    height: 20px;
+    background: url("../img/whiteboard-tools/add.svg") center center no-repeat;
+    border: none;
+    height: 100px;
+    width: 100%;
+    outline:none;
+    /* background-repeat:no-repeat; */
+    /* margin: 40px auto 10px 40%; */
+}
+#add:hover{
+    background: url("../img/whiteboard-tools/add.svg") center center no-repeat;
+    border: none;
+    height: 100px;
+    width: 100%;
+    -webkit-box-shadow: #999 0px 0px 8px;
+    -moz-box-shadow: #999 0px 0px 8px;
+    box-shadow: #999 0px 0px 1px;
 }
 
 canvas {
@@ -81,6 +95,17 @@ canvas {
     height: 50px;
     z-index: 1000;
     position: absolute;
+}
+
+#tools:hover + div{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    z-index: 1000;
+    position: absolute;
+    -webkit-box-shadow: #999 0px 0px 8px;
+    -moz-box-shadow: #999 0px 0px 8px;
+    box-shadow: #999 0px 0px 1px;
 }
 
 #rule {
