@@ -1,0 +1,50 @@
+[
+  {
+    "name": "我的",
+    "gid":71,
+    "login":false,
+    "canPost":true,
+    "forums": [
+        {"name": "我的问题", "fid": 72, "login": false},
+        {"name": "我的回答", "fid": 550, "login": false},
+        {"name": "收藏课程", "fid": 549, "login": false}
+      ]
+  },
+
+  {
+    "name": "达尔问社区",
+    "gid":89,
+    "login":false,
+    "canPost":true,
+    "forums": [
+      {"name": "心得笔记", "fid": 115, "login": false},
+      {"name": "精彩试题", "fid": 145, "login": false},
+      {"name": "课程视频", "fid": 551, "login": false}
+    ]
+  }
+
+//  {
+//    "name":"资源分享",
+//    "gid":11,
+//    "login":false,
+//    "canPost":true,
+//    "forums": [
+//      {"name": "心得笔记", "fid": 13, "login": false},
+//      {"name": "精彩试题", "fid": 14, "login": false},
+//      {"name": "课程视频", "fid": 15, "login": false}
+//    ]
+//  }
+
+//  {
+//    "name":"练习专区",
+//    "gid":11,
+//    "login":false,
+//    "canPost":true,
+//    "forums": [
+//      {"name": "小学组", "fid": 545, "login": false},
+//      {"name": "初中组", "fid": 544, "login": false},
+//      {"name": "高中组", "fid": 543, "login": false}
+//    ]
+//  }
+
+]
